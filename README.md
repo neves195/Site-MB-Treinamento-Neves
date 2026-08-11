@@ -97,7 +97,7 @@ site-mb-consultoria/
 
 ## 👤 Autor
 
-**João Paulo Neves** — estudante de Sistemas de Informação.
+**João Pedro das Neves** — estudante de Sistemas de Informação.
 
 ---
 
