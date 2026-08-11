@@ -1,0 +1,485 @@
+<title>Documento de Engenharia — Site MB Consultoria Neves</title>
+<style>
+  :root{
+    --bg:#EEF2F8; --surface:#FFFFFF; --surface-2:#F4F7FC; --surface-3:#E7EDF6;
+    --border:#D3DCEA; --border-2:#C2CEE0;
+    --ink:#0C1A2E; --ink-2:#2C3E58; --muted:#5B6E89;
+    --accent:#2563EB; --accent-soft:#3B82F6; --accent-ghost:rgba(37,99,235,.09);
+    --safety:#177A3E; --safety-ghost:rgba(23,122,62,.10);
+    --hazard:#B4530A; --hazard-ghost:rgba(180,83,10,.10);
+    --shadow:0 1px 2px rgba(16,34,60,.06),0 8px 30px rgba(16,34,60,.07);
+    --grid-line:rgba(37,99,235,.07);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#080F1C; --surface:#0F1B2E; --surface-2:#132239; --surface-3:#16273F;
+      --border:rgba(255,255,255,.09); --border-2:rgba(255,255,255,.14);
+      --ink:#F4F8FD; --ink-2:#C9D6E8; --muted:#8598B4;
+      --accent:#3B82F6; --accent-soft:#60A5FA; --accent-ghost:rgba(59,130,246,.14);
+      --safety:#4ADE80; --safety-ghost:rgba(74,222,128,.13);
+      --hazard:#FBBF24; --hazard-ghost:rgba(251,191,36,.13);
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.35);
+      --grid-line:rgba(96,165,250,.08);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#EEF2F8; --surface:#FFFFFF; --surface-2:#F4F7FC; --surface-3:#E7EDF6;
+    --border:#D3DCEA; --border-2:#C2CEE0;
+    --ink:#0C1A2E; --ink-2:#2C3E58; --muted:#5B6E89;
+    --accent:#2563EB; --accent-soft:#3B82F6; --accent-ghost:rgba(37,99,235,.09);
+    --safety:#177A3E; --safety-ghost:rgba(23,122,62,.10);
+    --hazard:#B4530A; --hazard-ghost:rgba(180,83,10,.10);
+    --shadow:0 1px 2px rgba(16,34,60,.06),0 8px 30px rgba(16,34,60,.07);
+    --grid-line:rgba(37,99,235,.07);
+  }
+  :root[data-theme="dark"]{
+    --bg:#080F1C; --surface:#0F1B2E; --surface-2:#132239; --surface-3:#16273F;
+    --border:rgba(255,255,255,.09); --border-2:rgba(255,255,255,.14);
+    --ink:#F4F8FD; --ink-2:#C9D6E8; --muted:#8598B4;
+    --accent:#3B82F6; --accent-soft:#60A5FA; --accent-ghost:rgba(59,130,246,.14);
+    --safety:#4ADE80; --safety-ghost:rgba(74,222,128,.13);
+    --hazard:#FBBF24; --hazard-ghost:rgba(251,191,36,.13);
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.35);
+    --grid-line:rgba(96,165,250,.08);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.6;font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:ui-monospace,"SFMono-Regular","Cascadia Code",Menlo,Consolas,monospace}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px}
+
+  /* ---- Cover ---- */
+  .cover{
+    position:relative;overflow:hidden;
+    margin:0 -22px 46px;padding:56px 22px 40px;
+    border-bottom:1px solid var(--border);
+    background:
+      linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
+  }
+  .cover::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),
+                     linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+    background-size:26px 26px;
+    mask-image:radial-gradient(120% 120% at 85% -10%,#000 30%,transparent 72%);
+    -webkit-mask-image:radial-gradient(120% 120% at 85% -10%,#000 30%,transparent 72%);
+  }
+  .cover>*{position:relative}
+  .eyebrow{
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin:0 0 14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
+  h1{
+    font-size:clamp(28px,5vw,44px);line-height:1.08;letter-spacing:-.02em;
+    font-weight:800;margin:0;text-wrap:balance;color:var(--ink);
+  }
+  .subtitle{font-size:clamp(16px,2.4vw,19px);color:var(--muted);margin:14px 0 0;max-width:60ch}
+  .meta{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+    margin-top:34px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  }
+  .meta div{background:var(--surface);padding:13px 16px}
+  .meta dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 3px}
+  .meta dd{margin:0;font-size:14.5px;font-weight:600;color:var(--ink-2)}
+  .badge-status{
+    display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
+    color:var(--hazard);background:var(--hazard-ghost);
+    border:1px solid color-mix(in srgb,var(--hazard) 35%,transparent);
+    padding:3px 11px;border-radius:999px;
+  }
+  .badge-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--hazard)}
+
+  /* ---- Sections ---- */
+  section{margin-top:44px}
+  .sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:18px}
+  .sec-num{
+    font-size:13px;font-weight:600;color:var(--accent);
+    border:1px solid var(--border-2);border-radius:8px;padding:3px 9px;flex-shrink:0;
+    background:var(--accent-ghost);
+  }
+  h2{font-size:22px;letter-spacing:-.01em;font-weight:750;margin:0;color:var(--ink);text-wrap:balance}
+  h2 .h2-sub{display:block;font-size:13.5px;font-weight:400;color:var(--muted);letter-spacing:0;margin-top:3px}
+  p{margin:0 0 14px;color:var(--ink-2);max-width:68ch}
+  .lead{font-size:17px}
+  strong{color:var(--ink);font-weight:650}
+  a{color:var(--accent);text-underline-offset:3px}
+
+  /* ---- Tables ---- */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--surface);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+  thead th{background:var(--surface-3);color:var(--ink);font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:650}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:var(--surface-2)}
+  .code-cell{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:var(--accent-soft);font-weight:600;white-space:nowrap}
+
+  /* ---- Two-col scope ---- */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.cols{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 12px;font-size:15px;display:flex;align-items:center;gap:9px}
+  .card ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .card li{position:relative;padding-left:24px;font-size:14.5px;color:var(--ink-2)}
+  .card li::before{position:absolute;left:0;top:1px;font-size:14px}
+  .yes li::before{content:"✓";color:var(--safety);font-weight:700}
+  .no li::before{content:"✕";color:var(--muted)}
+  .tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:6px}
+  .tag-in{color:var(--safety);background:var(--safety-ghost)}
+  .tag-out{color:var(--muted);background:var(--surface-3)}
+
+  /* ---- Architecture diagram ---- */
+  .arch{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px 20px;box-shadow:var(--shadow);overflow-x:auto}
+  .arch-inner{min-width:460px;display:flex;flex-direction:column;align-items:center;gap:0}
+  .actors{display:flex;gap:60px;justify-content:center;margin-bottom:6px}
+  .actor{font-size:13px;font-weight:600;color:var(--muted);text-align:center}
+  .actor .mono{font-size:11px;display:block;color:var(--accent);letter-spacing:.05em;margin-top:2px}
+  .layer{
+    width:100%;max-width:560px;border-radius:12px;padding:15px 18px;text-align:center;
+    border:1px solid var(--border-2);background:var(--surface-2);
+  }
+  .layer .lname{font-weight:700;font-size:15px;color:var(--ink)}
+  .layer .ldesc{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .layer.front{border-color:color-mix(in srgb,var(--accent) 40%,transparent);background:var(--accent-ghost)}
+  .layer.back{border-color:color-mix(in srgb,var(--accent) 50%,transparent);background:var(--accent-ghost)}
+  .layer.back .lname{color:var(--accent-soft)}
+  .connector{width:2px;height:26px;background:var(--border-2);position:relative}
+  .connector span{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:10.5px;color:var(--muted);white-space:nowrap;font-family:ui-monospace,monospace}
+  .stores{display:flex;gap:16px;width:100%;max-width:560px}
+  .stores .layer{flex:1}
+  .split{width:60%;max-width:340px;height:26px;position:relative}
+  .split::before,.split::after{content:"";position:absolute;top:0;width:2px;height:13px;background:var(--border-2)}
+  .split::before{left:25%}.split::after{right:25%}
+  .split i{position:absolute;top:13px;left:25%;right:25%;height:2px;background:var(--border-2)}
+  .note{font-size:13px;color:var(--muted);margin-top:16px;padding:12px 16px;border-left:3px solid var(--accent);background:var(--accent-ghost);border-radius:0 8px 8px 0}
+  .note.warn{border-left-color:var(--hazard);background:var(--hazard-ghost)}
+  .note.ok{border-left-color:var(--safety);background:var(--safety-ghost)}
+
+  /* ---- Entities ---- */
+  .entities{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .entity{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+  .entity h3{margin:0;padding:12px 16px;background:var(--surface-3);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-soft);font-family:ui-monospace,monospace}
+  .entity dl{margin:0;padding:8px 16px 14px}
+  .entity .row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed var(--border);font-size:13.5px}
+  .entity .row:last-child{border-bottom:none}
+  .entity .fname{font-family:ui-monospace,monospace;color:var(--ink)}
+  .entity .ftype{color:var(--muted);font-size:12.5px}
+  .pk{color:var(--accent);font-weight:700}
+  .fk{color:var(--safety);font-weight:700}
+
+  /* ---- Security matrix ---- */
+  .sec-rel{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;font-family:ui-monospace,monospace}
+
+  /* ---- Roadmap ---- */
+  .phases{display:flex;flex-direction:column;gap:14px;counter-reset:ph}
+  .phase{display:flex;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+  .phase .pn{counter-increment:ph;flex-shrink:0;width:38px;height:38px;border-radius:10px;background:var(--accent-ghost);color:var(--accent);display:grid;place-items:center;font-weight:800;font-family:ui-monospace,monospace}
+  .phase .pn::before{content:counter(ph)}
+  .phase h3{margin:0 0 6px;font-size:16px}
+  .phase p{margin:0;font-size:14px;color:var(--muted)}
+
+  /* ---- Checklist ---- */
+  .checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .checklist li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink-2)}
+  .checklist .box{flex-shrink:0;width:19px;height:19px;border:2px solid var(--border-2);border-radius:5px;margin-top:2px}
+
+  /* ---- Glossary ---- */
+  .gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .gloss div{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:13px 15px}
+  .gloss dt{font-weight:700;font-size:14px;color:var(--accent-soft);font-family:ui-monospace,monospace;margin-bottom:3px}
+  .gloss dd{margin:0;font-size:13.5px;color:var(--ink-2)}
+
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media(prefers-reduced-motion:no-preference){
+    tbody tr td{transition:background .15s ease}
+  }
+</style>
+
+<div class="cover">
+  <div class="wrap" style="padding-bottom:0;padding-left:0;padding-right:0;max-width:880px">
+    <p class="eyebrow">Documento de Engenharia do Sistema</p>
+    <h1>Site MB Consultoria e Treinamento Neves</h1>
+    <p class="subtitle">Site institucional de divulgação (vitrine) com área administrativa de cadastro — planejamento técnico completo antes da implementação.</p>
+    <dl class="meta">
+      <div><dt>Autor</dt><dd>João Paulo Neves</dd></div>
+      <div><dt>Data</dt><dd>30/07/2026</dd></div>
+      <div><dt>Versão</dt><dd>1.0</dd></div>
+      <div><dt>Fase</dt><dd><span class="badge-status">Planejamento</span></dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">01</span><h2>Visão Geral e Objetivo</h2></div>
+    <p class="lead">Construir o site institucional da <strong>MB Consultoria e Treinamento Neves</strong> para divulgar a empresa e apresentar seus serviços. O site funciona como uma <strong>vitrine</strong>: atrai empresas e alunos, mostra os cursos e treinamentos, e gera contato via WhatsApp.</p>
+    <p>Numa segunda fase, ganha uma <strong>área administrativa protegida por login</strong>, onde o responsável cadastra, edita e remove cursos e adiciona fotos das turmas — sem tocar no código.</p>
+    <div class="note">Mensagem-chave do site: <strong>“Segurança do trabalho sob controle.”</strong></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">02</span><h2>Escopo</h2></div>
+    <div class="cols">
+      <div class="card">
+        <h3><span class="tag tag-in">Dentro</span> Faz parte do sistema</h3>
+        <ul class="yes">
+          <li>Site vitrine público, responsivo e interativo</li>
+          <li>Catálogo de cursos por categoria, com filtro e detalhes</li>
+          <li>Galeria de fotos das turmas (prova social)</li>
+          <li>Destaque para “certificado emitido na hora”</li>
+          <li>Contato principal via WhatsApp</li>
+          <li>Área administrativa (login) para cadastro</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="tag tag-out">Fora</span> Não faz parte (por ora)</h3>
+        <ul class="no">
+          <li>Venda de cursos on-line / pagamento pelo site</li>
+          <li>Emissão automática de certificados</li>
+          <li>Cadastro e login de alunos</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">03</span><h2>Público-Alvo</h2></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Público</th><th>Necessidade</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Empresas</strong></td><td>Capacitar equipes nas NRs; obter conformidade legal e documentação.</td></tr>
+          <tr><td><strong>Alunos</strong> (pessoa física)</td><td>Fazer cursos de operação de máquinas e obter certificado.</td></tr>
+          <tr><td><strong>Administrador</strong> (você)</td><td>Manter o catálogo e as fotos sempre atualizados.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">04</span><h2>Requisitos Funcionais<span class="h2-sub">O que o sistema faz</span></h2></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Cód.</th><th>Requisito</th></tr></thead>
+        <tbody>
+          <tr><td class="code-cell">RF01</td><td>Exibir a página inicial (hero) com a proposta da empresa.</td></tr>
+          <tr><td class="code-cell">RF02</td><td>Exibir os serviços (treinamentos e consultoria).</td></tr>
+          <tr><td class="code-cell">RF03</td><td>Listar o catálogo de cursos, com filtro por categoria.</td></tr>
+          <tr><td class="code-cell">RF04</td><td>Exibir os detalhes de cada curso (NR, carga horária, descrição).</td></tr>
+          <tr><td class="code-cell">RF05</td><td>Exibir a galeria de fotos das turmas realizadas.</td></tr>
+          <tr><td class="code-cell">RF06</td><td>Destacar que o certificado é emitido na hora.</td></tr>
+          <tr><td class="code-cell">RF07</td><td>Oferecer contato via WhatsApp em pontos estratégicos.</td></tr>
+          <tr><td class="code-cell">RF08</td><td>Permitir que o administrador faça login em área protegida.</td></tr>
+          <tr><td class="code-cell">RF09</td><td>Permitir ao admin cadastrar, editar, listar e remover cursos (CRUD).</td></tr>
+          <tr><td class="code-cell">RF10</td><td>Permitir ao admin adicionar e remover fotos das turmas.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">05</span><h2>Requisitos Não-Funcionais<span class="h2-sub">Como o sistema deve ser</span></h2></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Cód.</th><th>Requisito</th></tr></thead>
+        <tbody>
+          <tr><td class="code-cell">RNF01</td><td><strong>Responsividade</strong> — celular, tablet, notebook e PC (mobile-first).</td></tr>
+          <tr><td class="code-cell">RNF02</td><td><strong>Segurança</strong> — defesa em camadas; site público exposto a ataques.</td></tr>
+          <tr><td class="code-cell">RNF03</td><td><strong>Desempenho</strong> — carregamento rápido, inclusive em 4G.</td></tr>
+          <tr><td class="code-cell">RNF04</td><td><strong>Acessibilidade</strong> — contraste, teclado, textos alternativos.</td></tr>
+          <tr><td class="code-cell">RNF05</td><td><strong>Interatividade</strong> — micro-interações e animações sutis.</td></tr>
+          <tr><td class="code-cell">RNF06</td><td><strong>Manutenibilidade</strong> — código em camadas, fácil de evoluir.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">06</span><h2>Arquitetura do Sistema</h2></div>
+    <p>Arquitetura <strong>desacoplada</strong>: o frontend nunca acessa o banco diretamente — todo pedido passa pelo backend, o “porteiro” que valida tudo.</p>
+    <div class="arch">
+      <div class="arch-inner">
+        <div class="actors">
+          <div class="actor">Público<span class="mono">visitante</span></div>
+          <div class="actor">Admin<span class="mono">você</span></div>
+        </div>
+        <div class="connector"></div>
+        <div class="layer front">
+          <div class="lname">Frontend — React + TypeScript (SPA)</div>
+          <div class="ldesc">Vitrine pública · Painel admin (só logado)</div>
+        </div>
+        <div class="connector"><span>HTTPS · JSON</span></div>
+        <div class="layer back">
+          <div class="lname">Backend — Spring Boot · API REST</div>
+          <div class="ldesc">Spring Security (login) · regras de negócio · validações</div>
+        </div>
+        <div class="split"><i></i></div>
+        <div class="stores">
+          <div class="layer">
+            <div class="lname">Banco PostgreSQL</div>
+            <div class="ldesc">cursos · turmas · usuário admin</div>
+          </div>
+          <div class="layer">
+            <div class="lname">Armazenamento de imagens</div>
+            <div class="ldesc">foto no serviço · link no banco</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note ok">O React nunca fala direto com o banco. Essa separação já é a primeira camada de segurança.</div>
+
+    <h3 style="font-size:16px;margin:26px 0 10px">6.1 · Área administrativa (rota protegida)</h3>
+    <p>A área de cadastro <strong>não</strong> é um app separado: é uma <strong>rota protegida dentro do mesmo frontend</strong>, liberada só após o login — como entrar por dentro da vitrine para trocar a roupa do manequim.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>🌐 Público (qualquer um)</th><th>🔑 Restrito (só com login)</th></tr></thead>
+        <tbody>
+          <tr><td class="code-cell">/ &nbsp;(home)</td><td class="code-cell">/login &nbsp;→ entrada</td></tr>
+          <tr><td class="code-cell">/cursos</td><td class="code-cell">/painel &nbsp;→ CRUD de cursos</td></tr>
+          <tr><td class="code-cell">/turmas</td><td class="code-cell">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ upload de fotos</td></tr>
+          <tr><td class="code-cell">/contato</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn">Esconder a rota no frontend <strong>não</strong> é proteção. A segurança real está no <strong>backend</strong>: o Spring Security recusa qualquer pedido à API sem um token (JWT) válido. A “porta” pode ser de vidro — o que segura é a “fechadura”.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">07</span><h2>Stack Tecnológica</h2></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Camada</th><th>Tecnologia</th><th>Por quê</th></tr></thead>
+        <tbody>
+          <tr><td>Frontend</td><td class="code-cell">React + TypeScript</td><td>Protótipo pronto; tipos alinham com a base tipada do autor (Java/C#).</td></tr>
+          <tr><td>Backend</td><td class="code-cell">Java · Spring Boot</td><td>Alinhado à base do João; robusto e seguro.</td></tr>
+          <tr><td>Segurança</td><td class="code-cell">Spring Security · JWT</td><td>Autenticação madura e testada.</td></tr>
+          <tr><td>Banco de dados</td><td class="code-cell">PostgreSQL</td><td>Relacional, robusto, gratuito, combina com Spring.</td></tr>
+          <tr><td>Acesso a dados</td><td class="code-cell">Spring Data JPA</td><td>Evita SQL injection; produtivo.</td></tr>
+          <tr><td>Imagens</td><td class="code-cell">Serviço externo</td><td>Banco não deve guardar arquivos pesados.</td></tr>
+          <tr><td>Hospedagem</td><td class="code-cell">a definir</td><td>Há opções gratuitas para estudante.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">08</span><h2>Modelo de Dados</h2></div>
+    <div class="entities">
+      <div class="entity">
+        <h3>Curso</h3>
+        <dl>
+          <div class="row"><span class="fname pk">id</span><span class="ftype">Long · PK</span></div>
+          <div class="row"><span class="fname">categoria</span><span class="ftype">String</span></div>
+          <div class="row"><span class="fname">nome</span><span class="ftype">String</span></div>
+          <div class="row"><span class="fname">nr</span><span class="ftype">String</span></div>
+          <div class="row"><span class="fname">carga_horaria</span><span class="ftype">String</span></div>
+          <div class="row"><span class="fname">descricao_curta</span><span class="ftype">String</span></div>
+          <div class="row"><span class="fname">descricao_longa</span><span class="ftype">Text</span></div>
+          <div class="row"><span class="fname">icone</span><span class="ftype">String</span></div>
+          <div class="row"><span class="fname">ativo</span><span class="ftype">Boolean</span></div>
+        </dl>
+      </div>
+      <div class="entity">
+        <h3>Turma (foto)</h3>
+        <dl>
+          <div class="row"><span class="fname pk">id</span><span class="ftype">Long · PK</span></div>
+          <div class="row"><span class="fname fk">curso_id</span><span class="ftype">Long · FK</span></div>
+          <div class="row"><span class="fname">legenda</span><span class="ftype">String</span></div>
+          <div class="row"><span class="fname">local</span><span class="ftype">String</span></div>
+          <div class="row"><span class="fname">data</span><span class="ftype">Date</span></div>
+          <div class="row"><span class="fname">imagem_url</span><span class="ftype">String</span></div>
+        </dl>
+      </div>
+      <div class="entity">
+        <h3>Usuário Admin</h3>
+        <dl>
+          <div class="row"><span class="fname pk">id</span><span class="ftype">Long · PK</span></div>
+          <div class="row"><span class="fname">email</span><span class="ftype">String</span></div>
+          <div class="row"><span class="fname">senha_hash</span><span class="ftype">String · BCrypt</span></div>
+        </dl>
+      </div>
+    </div>
+    <p class="sec-rel">Relacionamento: um <span class="pk">Curso</span> &nbsp;1 &mdash;&lt; N&nbsp; <span class="fk">Turmas</span></p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">09</span><h2>Plano de Segurança<span class="h2-sub">Defesa em camadas</span></h2></div>
+    <div class="note warn">Nenhum sistema é 100% seguro. O objetivo é empilhar proteções até tornar o ataque inviável — e todas vêm de <strong>frameworks maduros</strong>, nunca de segurança “na mão”.</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Camada</th><th>Protege contra</th><th>Como</th></tr></thead>
+        <tbody>
+          <tr><td class="code-cell">HTTPS</td><td>Interceptação de dados</td><td>Certificado SSL (cadeado no navegador)</td></tr>
+          <tr><td class="code-cell">Spring Security</td><td>Acesso não autorizado</td><td>Só admin logado acessa o cadastro</td></tr>
+          <tr><td class="code-cell">Hash BCrypt</td><td>Vazamento de senhas</td><td>Senha nunca em texto puro</td></tr>
+          <tr><td class="code-cell">Token JWT</td><td>Falsificação de sessão</td><td>“Crachá” temporário e assinado</td></tr>
+          <tr><td class="code-cell">Validação</td><td>Dados maliciosos</td><td>Backend recusa dados fora do formato</td></tr>
+          <tr><td class="code-cell">Spring Data JPA</td><td>SQL Injection</td><td>Consultas parametrizadas</td></tr>
+          <tr><td class="code-cell">React escape</td><td>XSS</td><td>Neutraliza scripts injetados por padrão</td></tr>
+          <tr><td class="code-cell">CORS</td><td>Abuso da API por terceiros</td><td>Só o site oficial chama a API</td></tr>
+          <tr><td class="code-cell">Rate limiting</td><td>Força bruta no login</td><td>Limita tentativas por tempo</td></tr>
+          <tr><td class="code-cell">Menor privilégio</td><td>Escalada de acesso</td><td>Cada parte só acessa o necessário</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">10</span><h2>Fases do Projeto<span class="h2-sub">Roadmap</span></h2></div>
+    <div class="phases">
+      <div class="phase">
+        <div class="pn mono"></div>
+        <div><h3>Vitrine (frontend)</h3><p>Adaptar o protótipo React, inserir dados reais (WhatsApp, fotos, NRs, cargas horárias) e publicar o site estático — catálogo ainda “fixo”.</p></div>
+      </div>
+      <div class="phase">
+        <div class="pn mono"></div>
+        <div><h3>Backend e Cadastro (dinâmico)</h3><p>Criar a API em Spring Boot + PostgreSQL, login seguro (Spring Security + JWT), o CRUD de cursos e o gerenciamento de fotos, e conectar o React à API.</p></div>
+      </div>
+      <div class="phase">
+        <div class="pn mono"></div>
+        <div><h3>Publicação e Segurança final</h3><p>Configurar HTTPS, CORS e rate limiting; testes de segurança e responsividade; deploy (hospedagem) e monitoramento.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">11</span><h2>Pendências<span class="h2-sub">Dados a coletar</span></h2></div>
+    <ul class="checklist">
+      <li><span class="box"></span>Número/link oficial do WhatsApp.</li>
+      <li><span class="box"></span>Arquivo da logo em alta e código exato da cor da marca.</li>
+      <li><span class="box"></span>Fotos reais das turmas.</li>
+      <li><span class="box"></span>Conferir/confirmar NRs e cargas horárias de cada curso.</li>
+      <li><span class="box"></span>Definir hospedagem.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">12</span><h2>Glossário</h2></div>
+    <dl class="gloss">
+      <div><dt>Frontend</dt><dd>A parte visível do site — o que o visitante vê.</dd></div>
+      <div><dt>Backend</dt><dd>O “cérebro” nos bastidores, que processa e valida os pedidos.</dd></div>
+      <div><dt>API REST</dt><dd>A “linguagem” pela qual frontend e backend conversam (via JSON).</dd></div>
+      <div><dt>SPA</dt><dd>Site que carrega uma vez e atualiza sem recarregar a página.</dd></div>
+      <div><dt>CRUD</dt><dd>Create, Read, Update, Delete — as 4 operações sobre os dados.</dd></div>
+      <div><dt>JWT</dt><dd>Token (crachá digital) que prova que o usuário está logado.</dd></div>
+      <div><dt>Hash (BCrypt)</dt><dd>Transformação irreversível da senha, para guardá-la com segurança.</dd></div>
+      <div><dt>ORM / JPA</dt><dd>Ferramenta que liga o código Java às tabelas do banco.</dd></div>
+      <div><dt>TypeScript</dt><dd>JavaScript com tipos — declara o tipo de cada dado, como em Java/C#, e avisa erros enquanto você escreve.</dd></div>
+    </dl>
+  </section>
+
+  <footer>
+    <span>MB Consultoria e Treinamento Neves</span>
+    <span class="mono">Engenharia do Sistema · v1.0 · 30/07/2026</span>
+  </footer>
+
+</div>
