@@ -1,7 +1,9 @@
+import { getLinkWhatsapp } from "../config";
+
 function Contato() {
     const mensagem = 
         'Olá! Gostaria de solicitar um orçamento de treinamento com a MB Consultoria e Treinamento Neves.';
-    const linkWhatsapp = `https://wa.me/5514991839851?text=${encodeURIComponent(mensagem)}`;
+    const linkWhatsapp = getLinkWhatsapp(mensagem);
 
     return (
         <section id="contato" className="contato">

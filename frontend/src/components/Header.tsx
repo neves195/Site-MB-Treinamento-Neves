@@ -1,4 +1,9 @@
+import { getLinkWhatsapp } from "../config";
+
 function Header() {
+    const mensagem = "Olá! Gostaria de saber mais sobre os treinamentos da MB Consultoria Neves.";
+    const linkWhatsapp = getLinkWhatsapp(mensagem);
+
     return (
         <header className="header">
             <div className="header-logo">MB Consultoria e Treinamento Neves</div>  {/*Logo em texto por enquanto */}
@@ -11,7 +16,7 @@ function Header() {
 
                 <a
                     className="btn-whatsapp"
-                    href="https://wa.me/5514991839851"
+                    href={linkWhatsapp}
                     target="_blank"
                     rel="noopener"
                     >

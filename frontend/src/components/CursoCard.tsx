@@ -7,7 +7,7 @@ interface CursoCardProps {
 }
 
 function CursoCard({ curso }: CursoCardProps) {
-    const [aberto, setAberto] = useState(false);
+    const [aberto, setModalAberto] = useState(false);
 
     const mensagem = `Olá! Tenho interesse no curso de ${curso.nome} (${curso.nr}). Poderia me passar mais informações?`;
     const linkWhatsapp = `https://wa.me/5514991839851?text=${encodeURIComponent(mensagem)}`;
@@ -19,34 +19,53 @@ return (
         <p className="card-carga">{curso.cargaHoraria}</p>
         <p className="card-desc">{curso.descricaoCurta}</p>
 
-        {/* Botão que altera o estado. onClick roda uma função no clique.
-            setAberto(!aberto) inverte: se estava falso vira true, e vice-versa. */}
-        <button 
-            className="card-ementa-btn"
-            onClick={() => setAberto(!aberto)}
-        >
-            {/* Operador ternário: se aberto for true, mostra um texto: senão, outro. */}
-            {aberto ? 'Ocultar conteúdo' : 'Ver conteúdo programático'}
-        </button>
+        <div className="card-botoes">
 
-        {/* Renderização condicional: so mostra a lista se "aberto" for true.
-            "aberto && (...)" = " se aberto, desenhe isto". */}
-            {aberto && (
-                <ul className="card-ementa">
-                    {curso.conteudoProgramatico.map((topico) => (
-                        <li key={topico}>{topico}</li>
-                    ))}
-                </ul>
-            )}
+            {/* Abre o modal */}
+            <button className="btn-mais-info" onClick={() => setModalAberto(true)}>
+                Mais informações
+            </button>
 
-        <a 
-            className="card-whatsapp"
+            { /* Botão de whatsApp */}
+        <a  className="card-whatsapp"
             href={linkWhatsapp}
             target="_blank"
             rel="noopener"
         >
-            Tenho interesse
+            WhatsApp
         </a>
+    </div>
+
+    {/* modal so é desenhado quando modalAberto for true */}
+    {aberto && (
+        //overlay = fundo escuro; clica nele fecha o modal
+        <div className="modal-overlay" onClick={() => setModalAberto(false)}>
+            <div className="modal" onClick={(e) => e.stopPropagation()}>
+                <button
+                    className="modal-fechar"
+                    onClick={() => setModalAberto(false)}
+                    aria-label="Fechar"
+                    >
+                        x
+                    </button>
+
+                    <span className="card-nr">{curso.nr}</span>
+                    <h3 className="modal-titulo">{curso.nome}</h3>
+                    <p className="modal-carga">Carga horária: {curso.cargaHoraria}</p>
+
+                    <h4 className="modal-subtitulo">Conteúdo programático</h4>
+                    <ul className="modal-lista">
+                        {curso.conteudoProgramatico.map((topico) => (
+                            <li key={topico}>{topico}</li>
+                        ))}
+                    </ul>
+
+                    <a className="modal-cta" href={linkWhatsapp} target="_blank" rel="noopener">
+                        Tenho Interesse
+                    </a>
+            </div>
+        </div>
+    )}
     </div>
     );
 }

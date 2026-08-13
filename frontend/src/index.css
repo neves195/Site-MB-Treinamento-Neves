@@ -109,7 +109,9 @@ body {
 
 .card-whatsapp {
   display: inline-block;
-  margin-top: 14px;
+  margin-top: 0;
+  flex: 1;
+  text-align: center;
   background-color: rgba(74, 222, 128, 0.12);
   color: var(--ok);
   border: 1px solid rgba(74, 222, 128, 0.35);
@@ -335,3 +337,55 @@ h1, h2, h3 {
     transition: none;
   }
 }
+
+/* Linha dos dois botões do card */ 
+.card-botoes { display: flex; gap: 10px; margin-top: 14px; }
+
+.btn-mais-info {
+  flex: 1;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s, background-color .2s;
+}
+.btn-mais-info:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.08); }
+
+/* MODAL */
+.modal-overplay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  display: flex; align-items: center; justify-content: center;
+}
+.modal {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+  max-width: 480px; width: 100%;
+  max-height: 85vh; overflow-y: auto;
+}
+.modal-fechar {
+  position: absolute; top: 14px; right: 14px;
+  width: 34px; height: 34px;
+  border: none; border-radius: 50%;
+  background: var(--bg); color: var(--text);
+  font-size: 20px; line-height: 1; cursor: pointer;
+}
+.modal-titulo { font-size: 22px; margin-top: 10px; }
+.moda-carga { color: var(--accent); font-weight: 600; font-size: 14px; margin-top: 6px; }
+.modal-subtitulo {font-size: 15px; margin-top: 18px; }
+.modal-lista { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.modal-lista li { position: relative; padding-left: 22px; font-size: 14px; color: var(--muted); }
+.modal-lista li::before { content: '✓'; position: absolute; left: 0; color: var(--ok); font-weight: 700; }
+.modal-cta {
+  display: inline-block; margin-top: 20px;
+  background: var(--accent); color: #fff;
+  padding: 12px 22px; border-radius: 999px; font-weight: 600; text-decoration: none;
+}
+
