@@ -1,40 +1,56 @@
+import { getLinkWhatsapp } from '../config';
+
 function Hero() {
-    const mensagem =
+  const mensagem =
     'Olá! Gostaria de saber mais sobre os cursos e treinamentos da MB Consultoria e Treinamento Neves.';
-    const linkWhatsapp = `https://wa.me/550000000000000?text=${encodeURIComponent(mensagem)}`;
+  const linkWhatsapp = getLinkWhatsapp(mensagem);
 
-    return (
-        <section className="hero">
-            {/* Selo (badge) no topo */}
-            <span className="hero-badge">Treinamentos e NRs</span>
+  return (
+    <section className="hero">
+      <div className="hero-conteudo">
+        {/* Coluna esquerda: o texto */}
+        <div className="hero-texto">
+          <span className="hero-badge">🛡️ Referência em Segurança do Trabalho</span>
 
-            {/* Título com uma parte destacada em azul (o <span destaque>)*/}
-            <h1 className="hero-titulo">
-                Segurança do trabalho <span className="destaque">sob controle</span>
-            </h1>  
+          <h1 className="hero-titulo">
+            Sua escola de <span className="destaque">máquinas</span> e segurança.
+          </h1>
 
-            <p className="hero-subtitulo">
-                Capacitação em Normas Regulamentadoras e operação de máquinas, com 
-                consultoria para deixar sua empresa em conformidade e suas equipes
-                preparadas de verdade.
-            </p>
+          <p className="hero-subtitulo">
+            Treinamentos em Normas Regulamentadoras e operação de máquinas
+            pesadas, com consultoria para deixar sua empresa 100% em conformidade.
+          </p>
 
-            {/* Os dois botões principais */}
-            <div className="hero-botoes">
-                <a
-                className="btn-primario"
-                href={linkWhatsapp}
-                target="_blank"
-                rel="noopener"
-                >
-                    Fale no WhatsApp
-                </a>
-                <a className="btn-secundario" href="#cursos">
-                    Ver cursos
-                </a>
-            </div>
-        </section>
-    );
+          <div className="hero-botoes">
+            <a className="btn-primario" href={linkWhatsapp} target="_blank" rel="noopener">
+              Fale Conosco
+            </a>
+            <a className="btn-secundario" href="#cursos">
+              Ver Cursos
+            </a>
+          </div>
+
+          <div className="hero-tags">
+            <span className="hero-tag hero-tag-ok">✓ Certificado na hora</span>
+            <span className="hero-tag">Turmas abertas e in company — Agudos/SP</span>
+          </div>
+        </div>
+
+        {/* Coluna direita: imagem + card flutuante "15+ anos" */}
+        <div className="hero-visual">
+          <div className="hero-imagem">
+            <span className="hero-imagem-placeholder">
+              📷 Foto principal — treinamento com máquina
+            </span>
+          </div>
+          <div className="hero-flutuante">
+            <strong>15+ anos</strong>
+            <span>de experiência</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default Hero;

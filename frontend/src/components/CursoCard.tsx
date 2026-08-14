@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Curso } from '../types/curso';
+import { getLinkWhatsapp } from '../config';
 
 
 interface CursoCardProps {
@@ -10,7 +11,7 @@ function CursoCard({ curso }: CursoCardProps) {
     const [aberto, setModalAberto] = useState(false);
 
     const mensagem = `Olá! Tenho interesse no curso de ${curso.nome} (${curso.nr}). Poderia me passar mais informações?`;
-    const linkWhatsapp = `https://wa.me/5514991839851?text=${encodeURIComponent(mensagem)}`;
+    const linkWhatsapp = getLinkWhatsapp(mensagem);
 
 return (
     <div className="card">

@@ -1,8 +1,8 @@
-import { cursos } from './data/cursos';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Numeros from './components/Numeros';
 import Servicos from './components/Servicos';
-import CursoCard from './components/CursoCard';
+import Cursos from './components/Cursos';
 import Certificado from './components/Certificado';
 import Contato from './components/Contato';
 import Footer from './components/Footer';
@@ -15,29 +15,24 @@ function App() {
       <Hero />
 
       <Reveal>
-      <Servicos />
+        <Numeros />
       </Reveal>
 
       <Reveal>
-      {/* id="cursos" → destino do botão "Ver cursos" e do menu */}
-      <section id="cursos" className="container">
-        <h2 className="secao-titulo">Nossos cursos</h2>
-
-        <div className="cursos-grid">
-          {cursos.map((curso) => (
-            <CursoCard key={curso.id} curso={curso} />
-          ))}
-        </div>
-      </section>
+        <Servicos />
       </Reveal>
 
-    <Reveal>
-      <Certificado />
-    </Reveal>
+      <Reveal>
+        <Cursos />
+      </Reveal>
 
-    <Reveal>
-      <Contato />
-    </Reveal>
+      <Reveal>
+        <Certificado />
+      </Reveal>
+
+      <Reveal>
+        <Contato />
+      </Reveal>
 
       <Footer />
     </>

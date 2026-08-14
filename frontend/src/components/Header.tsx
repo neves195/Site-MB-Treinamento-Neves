@@ -1,6 +1,21 @@
+import { useState, useEffect } from "react"
 import { getLinkWhatsapp } from "../config";
 
 function Header() {
+    const [tema, setTema] = useState<'claro' | 'escuro'>('claro');
+
+    useEffect(() => {
+        if (tema === 'escuro') {
+            document.documentElement.setAttribute('data-theme', 'escuro');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+    }, [tema]);
+
+    function alterarTema() {
+        setTema(tema === 'claro' ? 'escuro' : 'claro');
+    }
+
     const mensagem = "Olá! Gostaria de saber mais sobre os treinamentos da MB Consultoria Neves.";
     const linkWhatsapp = getLinkWhatsapp(mensagem);
 
@@ -9,11 +24,22 @@ function Header() {
             <div className="header-logo">MB Consultoria e Treinamento Neves</div>  {/*Logo em texto por enquanto */}
 
             {/* Direita:  navegação + botão do whatsapp */}
+
             <nav className="header-nav">
                 <a href="#cursos">Cursos</a>
                 <a href="#contato">Contato</a>
                 <a href="#turmas">Turmas</a>
 
+
+            { /* Botão de tema - chama alterarTema no clique */}
+            <button
+                className="btn-tema"
+                onClick={alterarTema}
+                aria-label="Alterar tema"
+                >
+                    {tema === 'claro' ? '🌙' : '☀️'}
+                </button>
+                
                 <a
                     className="btn-whatsapp"
                     href={linkWhatsapp}
