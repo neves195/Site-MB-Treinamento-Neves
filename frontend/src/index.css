@@ -597,3 +597,99 @@ h1, h2, h3 {
   background: rgba(37, 99, 235, 0.12);
   color: var(--accent);
 }
+
+/* DIFERENCIAIS */
+.diferenciais-conteudo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .diferenciais-conteudo { grid-template-columns: 1fr; }
+}
+
+/* Nesta seção, o eyebrow/título/subtítulo ficam à ESQUERDA */
+.diferenciais .secao-eyebrow,
+.diferenciais .secao-titulo { text-align: left; }
+.diferenciais-sub { text-align: left; margin: 12px 0 0; }
+
+.diferenciais-lista {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.diferencial-item { display: flex; gap: 14px; align-items: flex-start; }
+.diferencial-icone {
+  flex-shrink: 0;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(37, 99, 235, 0.1);
+  font-size: 22px;
+}
+.diferencial-titulo { font-size: 16px; }
+.diferencial-texto { color: var(--muted); font-size: 14px; margin-top: 3px; }
+
+.diferenciais-imagem {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  aspect-ratio: 3 / 4;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.diferenciais-nota {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 24px;
+}
+
+/* PARA EMPRESAS / PARA ALUNOS */
+.publico-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 780px) {
+  .publico-grid { grid-template-columns: 1fr; }
+}
+.publico-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+}
+.publico-card-destaque {
+  background: linear-gradient(160deg, rgba(37, 99, 235, 0.08), var(--surface));
+  border-color: rgba(37, 99, 235, 0.25);
+}
+.publico-eyebrow { text-align: left; margin-bottom: 12px; }
+.publico-titulo { font-size: clamp(20px, 2.6vw, 26px); line-height: 1.2; }
+.publico-lista {
+  list-style: none;
+  margin: 20px 0 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.publico-lista li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 15px;
+}
+.publico-lista li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--ok);
+  font-weight: 700;
+}
