@@ -9,6 +9,8 @@ import Footer from './components/Footer';
 import Reveal from './components/Reveal';
 import Publico from './components/Publico';
 import Diferenciais from './components/DIferenciais';
+import Depoimentos from './components/Depoimentos';
+import FAQ from './components/FAQ';
 
 import Turmas from './components/Turmas';
 
@@ -40,6 +42,14 @@ function App() {
 
       <Reveal>
         <Turmas />
+      </Reveal>
+
+      <Reveal>
+          <Depoimentos />
+      </Reveal>
+
+      <Reveal>
+          <FAQ />
       </Reveal>
 
       <Reveal>
