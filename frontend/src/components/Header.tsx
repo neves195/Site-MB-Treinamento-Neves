@@ -20,18 +20,31 @@ function Header() {
     const linkWhatsapp = getLinkWhatsapp(mensagem);
 
     return (
+        
         <header className="header">
-            <div className="header-logo">MB Consultoria e Treinamento Neves</div>  {/*Logo em texto por enquanto */}
+            {/* Esquerda: logo */}
+            <div className="header-logo">
+           <img 
+           src={tema === 'escuro' ? '/logo-branca.png' : '/logo-azul.png'}
+           alt="MB Consultoria Neves"
+           className="header-logo-img"
+           />
+        </div>
 
-            {/* Direita:  navegação + botão do whatsapp */}
+            {/* Centro: os atalhos */}
 
             <nav className="header-nav">
+                <a href="#servicos">Serviços</a>
                 <a href="#cursos">Cursos</a>
+                <a href="#diferenciais">Diferenciais</a>
+                <a href="#turmas">Turmas</a> 
+                 <a href="#depoimentos">Depoimentos</a>
                 <a href="#contato">Contato</a>
-                <a href="#turmas">Turmas</a>
 
+            </nav>
 
-            { /* Botão de tema - chama alterarTema no clique */}
+            { /* Direita: tema + whatsapp */}
+            <div className="header-acoes">
             <button
                 className="btn-tema"
                 onClick={alterarTema}
@@ -48,7 +61,7 @@ function Header() {
                     >
                     Fale no WhatsApp
                 </a>
-            </nav>
+            </div>
         </header>
     );
 }
