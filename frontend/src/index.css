@@ -40,6 +40,7 @@ body {
   color: var(--text);
   font-family: var(--font-corpo);
   line-height: 1.6;
+  overflow-x: hidden;   /* impede rolagem/deslocamento horizontal no mobile */
 }
 
 .container {
@@ -357,50 +358,77 @@ html {
   margin-top: 10px;
 }
 
-/* Contato - chamada final (CTA) com degradê azul. */
-.contato {
+/* CTA FINAL */
+.cta {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 40px 20px 60px;
+  padding: 40px 20px 70px;
 }
-
-.contato-box {
-  background: linear-gradient(
-    160deg,
-    rgba(59,130, 246, 0.12),
-    var(--surface)
-  );
-  border: 1px solid rgba(59, 130, 246, 0.28);
-  border-radius: 20px;
-  padding: 48px 28px;
+.cta-box {
+  background: linear-gradient(160deg, rgba(37, 99, 235, 0.12), var(--surface));
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 24px;
+  padding: 56px 28px;
   text-align: center;
 }
-
-.contato-titulo { font-size: clamp(24px, 4vw, 34px); }
-.contato-texto {
+.cta-titulo {
+  font-size: clamp(26px, 4vw, 40px);
+  line-height: 1.15;
+}
+.cta-titulo .destaque { color: var(--accent); }
+.cta-texto {
   color: var(--muted);
   font-size: 16px;
-  margin: 14px auto 24px;
+  margin: 16px auto 28px;
   max-width: 520px;
 }
+.cta-botao { font-size: 16px; padding: 16px 30px; }
 
+/* RODAPÉ (expandido) */
 .rodape {
   border-top: 1px solid var(--border);
-  padding: 28px 20px;
+  background: var(--surface);
+  margin-top: 40px;
 }
-
 .rodape-conteudo {
   max-width: 1100px;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 48px 20px 32px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.3fr;
+  gap: 40px;
 }
-
-.rodape-marca { font-weight: 700; }
-.rodape-copy { color: var(--muted); font-size: 14px; }
+@media (max-width: 780px) {
+  .rodape-conteudo { grid-template-columns: 1fr; gap: 28px; }
+}
+.rodape-logo { font-family: var(--font-titulo); font-weight: 800; font-size: 18px; }
+.rodape-desc { color: var(--muted); font-size: 14px; margin-top: 12px; max-width: 300px; }
+.rodape-redes { display: flex; gap: 12px; margin-top: 16px; font-size: 20px; }
+.rodape-titulo {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.rodape-links, .rodape-contato {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rodape-links a { color: var(--muted); text-decoration: none; font-size: 14px; }
+.rodape-links a:hover { color: var(--accent); }
+.rodape-contato li { color: var(--muted); font-size: 14px; }
+.rodape-base {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 20px;
+}
 
 h1, h2, h3 {
   font-family: var(--font-titulo);
@@ -586,6 +614,11 @@ h1, h2, h3 {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
+}
+/* Foco arredondado (o outline padrão é retangular; o box-shadow acompanha a pílula) */
+.cursos-aba:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.35);
 }
 .cursos-aba-num {
   background: rgba(255, 255, 255, 0.25);
@@ -853,4 +886,14 @@ h1, h2, h3 {
   font-size: 14px;
   line-height: 1.6;
   padding: 0 20px 18px;
+}
+
+/* Ajustes de celular */
+@media (max-width: 768px) {
+  .header { padding: 12px 16px; }
+  .header-logo { font-size: 14px; }
+  .header-nav { gap: 10px; }
+  /* esconde os links de texto (Cursos, Contato, Turmas) no celular */
+  .header-nav a:not(.btn-whatsapp) { display: none; }
+  .header-nav .btn-whatsapp { padding: 8px 14px; font-size: 13px; }
 }

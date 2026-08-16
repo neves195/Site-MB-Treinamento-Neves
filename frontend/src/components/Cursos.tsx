@@ -27,7 +27,7 @@ function Cursos() {
                     return (
                         <button
                             key={cat.id}
-                            className={ativa ? 'curso-ava ativa' : 'cursos-aba'}
+                            className={ativa ? 'cursos-aba ativa' : 'cursos-aba'}
                             onClick={() => setCategoriaAtiva(cat.id)}
                             >
                                 {cat.rotulo} <span className="cursos-aba-num">{quantidade}</span>
