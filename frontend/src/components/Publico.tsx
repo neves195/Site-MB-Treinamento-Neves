@@ -13,7 +13,7 @@ function Publico() {
           <p className="secao-eyebrow publico-eyebrow">Para Empresas</p>
           <h3 className="publico-titulo">Equipe capacitada, empresa em conformidade</h3>
           <ul className="publico-lista">
-            <li>Turmas in company, na sua planta e no seu turno</li>
+            <li>Treinamento in company em todo o Brasil, na sua planta e no seu turno</li>
             <li>Documentação pronta para auditoria e fiscalização</li>
             <li>Controle de validades e agenda de reciclagem</li>
           </ul>
@@ -42,7 +42,7 @@ function Publico() {
             target="_blank"
             rel="noopener"
           >
-            Consultar próxima turma
+            Ver datas das próximas turmas
           </a>
         </div>
       </div>

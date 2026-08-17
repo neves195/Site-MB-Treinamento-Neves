@@ -13,17 +13,18 @@ function Hero() {
           <span className="hero-badge">🛡️ Referência em Segurança do Trabalho</span>
 
           <h1 className="hero-titulo">
-            Sua escola de <span className="destaque">máquinas</span> e segurança.
+            Opere máquinas com segurança - e com <span className="destaque"> certificado na hora</span>.
           </h1>
 
           <p className="hero-subtitulo">
-            Treinamentos em Normas Regulamentadoras e operação de máquinas
-            pesadas, com consultoria para deixar sua empresa 100% em conformidade.
+            Treinamentos prático com máquinas de verdade e certificado válido em
+            todo o Brasil, emitido na hora. Atendemos empresas em todo o país
+            (in company) e alunos em Agudos/SP e região.
           </p>
 
           <div className="hero-botoes">
             <a className="btn-primario" href={linkWhatsapp} target="_blank" rel="noopener">
-              Fale Conosco
+              Falar no WhatsApp
             </a>
             <a className="btn-secundario" href="#cursos">
               Ver Cursos
@@ -32,7 +33,7 @@ function Hero() {
 
           <div className="hero-tags">
             <span className="hero-tag hero-tag-ok">✓ Certificado na hora</span>
-            <span className="hero-tag">Turmas abertas e in company — Agudos/SP</span>
+            <span className="hero-tag">In company em todo o Brasil · Turmas em Agudos/SP</span>
           </div>
         </div>
 
