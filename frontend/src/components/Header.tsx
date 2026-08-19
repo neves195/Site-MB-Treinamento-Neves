@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { getLinkWhatsapp } from "../config";
 
 function Header() {
+    const [menuAberto, setMenuAberto] = useState(false);
     const [tema, setTema] = useState<'claro' | 'escuro'>('claro');
 
     useEffect(() => {
@@ -25,22 +26,25 @@ function Header() {
             {/* Esquerda: logo */}
             <div className="header-logo">
            <img 
-           src={tema === 'escuro' ? '/logo-branca.png' : '/logo-azul.png'}
+           src="/logo-branca.png"
            alt="MB Consultoria Neves"
            className="header-logo-img"
            />
         </div>
 
             {/* Centro: os atalhos */}
-
-            <nav className="header-nav">
-                <a href="#servicos">Serviços</a>
-                <a href="#cursos">Cursos</a>
-                <a href="#diferenciais">Diferenciais</a>
-                <a href="#turmas">Turmas</a> 
-                 <a href="#depoimentos">Depoimentos</a>
-                <a href="#contato">Contato</a>
-
+            <nav className={`header-nav${menuAberto ? ' aberto' : ''}`}>
+            {menuAberto && (
+            <button className="btn-fechar-menu" onClick={() => setMenuAberto(false)}>
+                    ✕
+                </button>
+            )}
+            <a href="#servicos" onClick={() => setMenuAberto(false)}>Serviços</a>
+            <a href="#cursos" onClick={() => setMenuAberto(false)}>Cursos</a>
+            <a href="#diferenciais" onClick={() => setMenuAberto(false)}>Diferenciais</a>
+            <a href="#turmas" onClick={() => setMenuAberto(false)}>Turmas</a>
+            <a href="#depoimentos" onClick={() => setMenuAberto(false)}>Depoimentos</a>
+            <a href="#contato" onClick={() => setMenuAberto(false)}>Contato</a>
             </nav>
 
             { /* Direita: tema + whatsapp */}
@@ -52,7 +56,9 @@ function Header() {
                 >
                     {tema === 'claro' ? '🌙' : '☀️'}
                 </button>
-                
+                <button className="btn-hamburger" onClick={() => setMenuAberto(true)} aria-label="Abrir menu">
+                ☰
+                </button>
                 <a
                     className="btn-whatsapp"
                     href={linkWhatsapp}

@@ -133,12 +133,12 @@ body {
 }
 
 .header-nav a {
-  color: var(--muted);
+  color: #CBD5E1;
   text-decoration: none;
   font-size: 15px;
 }
 
-.header-nav a:hover { color: var(--text); }
+.header-nav a:hover { color: #FFFFFF; }
 
 .btn-whatsapp {
   background-color: var(--accent);
@@ -1006,12 +1006,61 @@ h1, h2, h3 {
 }
 
 /* Ajustes de celular */
+/* Botão hambúrguer (escondido no desktop) */
+.btn-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 26px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
 @media (max-width: 768px) {
   .header { padding: 12px 16px; }
-  /* esconde os atalhos no celular (voltam num menu hambúrguer depois) */
   .header-nav { display: none; }
   .btn-whatsapp { padding: 8px 14px; font-size: 13px; }
   .header-logo-img { height: 34px; }
+  .btn-hamburger { display: block; }
+
+  /* Menu mobile aberto */
+  .header-nav.aberto {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(12,26,46,0.96);
+    backdrop-filter: blur(16px);
+    padding: 80px 32px 40px;
+    gap: 0;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+  .header-nav.aberto a {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    text-align: left;
+  }
+  .header-nav.aberto a:last-child { border-bottom: none; }
+
+  /* Botão fechar dentro do menu */
+  .btn-fechar-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+  }
 }
 
 /* LOGO */
