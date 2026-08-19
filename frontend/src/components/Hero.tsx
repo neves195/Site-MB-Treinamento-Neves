@@ -40,10 +40,7 @@ function Hero() {
         {/* Coluna direita: imagem + card flutuante "15+ anos" */}
         <div className="hero-visual">
           <div className="hero-imagem">
-            <span className="hero-imagem-placeholder">
-              📷 Foto principal — treinamento com máquina
-            </span>
-          </div>
+            </div>
           <div className="hero-flutuante">
             <strong>15+ anos</strong>
             <span>de experiência</span>

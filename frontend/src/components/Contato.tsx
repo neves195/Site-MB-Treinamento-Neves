@@ -12,8 +12,8 @@ function Contato() {
           Pronto para começar sua <span className="destaque">formação</span>?
         </h2>
         <p className="cta-texto">
-          Resposta rápida no WhatsApp. Conte quantas pessoas precisa capacitar e
-          em qual curso — montamos a proposta na hora.
+          Resposta rápida no WhatsApp, sem compromisso, Conte quantas pessoas
+          precisa capacitar e em qual curso - montamos a proposta na hora.
         </p>
         <a
           className="btn-primario cta-botao"

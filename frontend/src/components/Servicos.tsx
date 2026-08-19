@@ -2,10 +2,10 @@ function Servicos() {
     return (
         <section id="servicos" className="container servicos">
             <p className="secao-eyebrow">Nossos Serviços</p>
-            <h2 className="secao-titulo">O que torna a MB Consultoria sua Melhor Escolha</h2>
+            <h2 className="secao-titulo">Treinamento que qualifica, consultoria que protege</h2>
             <p className="secao-subtitulo">
-                Unimos experiência, estrutura e compromisso com a
-                evolução profissional da sua equipe e do seus colaboradores.
+                Da capacitação do operador à documentação da empresa - resolvemos os dois
+                lados da segurança do trabalho, com prática de verdade e certificado na hora.
             </p>
 
             <div className="servicos-grid">

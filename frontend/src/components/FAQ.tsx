@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const perguntas = [
-    { id: 1, pergunta: 'Como faço minha matrícula?', resposta: 'É simples: fale com a gente pelo WhatsApp, escolha o curso e a data, e cuidamos do resto.' },
+  { id: 1, pergunta: 'Como faço minha matrícula?', resposta: 'É simples: fale com a gente pelo WhatsApp, escolha o curso e a data, e cuidamos do resto.' },
   { id: 2, pergunta: 'Quando começam as próximas turmas?', resposta: 'Temos turmas abertas ao longo do mês. Consulte a próxima data pelo WhatsApp — também montamos turmas in company na sua empresa.' },
   { id: 3, pergunta: 'Quais documentos preciso apresentar?', resposta: 'Geralmente RG, CPF e comprovante de escolaridade. Alguns cursos podem exigir ASO — a gente te orienta na inscrição.' },
   { id: 4, pergunta: 'O certificado é válido em todo o Brasil?', resposta: 'Sim. Nossos certificados seguem as Normas Regulamentadoras e têm validade em todo o território nacional.' },
