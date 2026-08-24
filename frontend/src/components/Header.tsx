@@ -13,6 +13,16 @@ function Header() {
         }
     }, [tema]);
 
+    const [rolado, setRolado] = useState(false);
+
+    useEffect(() => {
+        function verificarScroll() {
+        setRolado(window.scrollY > 80);
+        }
+        window.addEventListener('scroll', verificarScroll);
+        return () =>window.removeEventListener('scroll', verificarScroll);
+        }, []);
+
     function alterarTema() {
         setTema(tema === 'claro' ? 'escuro' : 'claro');
     }
@@ -22,7 +32,7 @@ function Header() {
 
     return (
         
-        <header className="header">
+        <header className={`header${rolado ? ' rolado' : ''}`}>
             {/* Esquerda: logo */}
             <div className="header-logo">
            <img 
