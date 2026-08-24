@@ -13,13 +13,12 @@ function Hero() {
           <span className="hero-badge">🛡️ Referência em Segurança do Trabalho</span>
 
           <h1 className="hero-titulo">
-            Opere máquinas com segurança - e com <span className="destaque"> certificado na hora</span>.
+            Opere máquinas com segurança e com <span className="destaque"> certificado na hora</span>.
           </h1>
 
           <p className="hero-subtitulo">
-            Treinamentos prático com máquinas de verdade e certificado válido em
-            todo o Brasil, emitido na hora. Atendemos empresas em todo o país
-            (in company) e alunos em Agudos/SP e região.
+            Capacitação com aulas práticas diretamente nos equipamentos, 
+            focada no desenvolvimento profissional e na segurança durante a operação.
           </p>
 
           <div className="hero-botoes">
