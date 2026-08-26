@@ -1,3 +1,5 @@
+import { FaInstagram, FaFacebook } from 'react-icons/fa';
+
 // Links de navegação do rodapé (lista para o .map()).
 const navLinks = [
   { href: '#servicos', label: 'Serviços' },
@@ -22,8 +24,8 @@ function Footer() {
             do trabalho — Agudos/SP.
           </p>
           <div className="rodape-redes">
-            <a href="#" aria-label="Instagram">📷</a>
-            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Instagram"><FaInstagram size={20} /></a>
+            <a href="#" aria-label="Facebook"><FaFacebook size={20} /></a>
           </div>
         </div>
 

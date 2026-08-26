@@ -1,8 +1,10 @@
+import { Presentation, Award, Users, FileText, Camera } from 'lucide-react';
+
 const diferencias = [
-    { icone: '👨‍🏫', titulo: 'Aulas Teóricas e Práticas', texto: 'Operação real em máquinas, com instrutores experientes no campo.' },
-    { icone: '📃', titulo: 'Certificado na Hora', texto: 'Terminou o treinamento, sai com o certificado em mãos - válido em todo o Brasil.' },
-    { icone: '👨‍🎓', titulo: 'Empresa e Alunos', texto: 'Turmas in company ou abertas - atendemos empresas e pessoas físicas.' },
-    { icone: '📄', titulo: 'Documentação', texto: 'Suporte do início á emissão - inscrição, aprendizado entrega do certificado.' },
+    { icone: Presentation, titulo: 'Aulas Teóricas e Práticas', texto: 'Operação real em máquinas, com instrutores experientes no campo.' },
+    { icone: Award, titulo: 'Certificado na Hora', texto: 'Terminou o treinamento, sai com o certificado em mãos - válido em todo o Brasil.' },
+    { icone: Users, titulo: 'Empresa e Alunos', texto: 'Turmas in company ou abertas - atendemos empresas e pessoas físicas.' },
+    { icone: FileText, titulo: 'Documentação', texto: 'Suporte do início á emissão - inscrição, aprendizado entrega do certificado.' },
 ];
 
 function Diferenciais() {
@@ -18,10 +20,10 @@ function Diferenciais() {
                         certificação reconhecida em todo o território nacional.
                     </p>
 
-                    <ul className="diferenciais-list<a">
+                    <ul className="diferenciais-lista">
                         {diferencias.map((item) => (
                             <li key={item.titulo} className="diferencial-item">
-                                <span className="diferencial-icone" aria-hidden="true">{item.icone}</span>
+                                <item.icone className="diferencial-icone" size={22} aria-hidden="true" />
                                 <div>
                                     <h3 className="diferencial-titulo">{item.titulo}</h3>
                                     <p className="diferencial-texto">{item.texto}</p>
@@ -32,9 +34,10 @@ function Diferenciais() {
                 </div>
 
                 {/* Coluna direita: imagem */}
-                <div className="direrenciais-imagem">
+                <div className="diferenciais-imagem">
                     <span className="hero-imagem-placeholder">
-                        📷 Foto da equipe ou do treinamento prático
+                        <Camera size={28} aria-hidden="true" />
+                        Foto da equipe ou do treinamento prático
                     </span>
                 </div>
             </div>

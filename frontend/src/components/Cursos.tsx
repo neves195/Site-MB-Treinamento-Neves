@@ -17,7 +17,7 @@ function Cursos() {
     return (
         <section id="cursos" className="container cursos">
             <p className="secao-eyebrow">Cursos em Destaque</p>
-            <h2 className="secao-titulo">Nossos Cursos Mais Buscados</h2>
+            <h2 className="secao-titulo">Cursos para Cada Necessidade</h2>
 
             {/* Abas de categoria */}
             <div  className="cursos-abas">

@@ -1,3 +1,5 @@
+import { HardHat, ClipboardCheck } from 'lucide-react';
+
 function Servicos() {
     return (
         <section id="servicos" className="container servicos">
@@ -12,7 +14,7 @@ function Servicos() {
 
                 {/* Pilar 1 - Treinamentos */}
                 <div className="servico-card">
-          <span className="servico-icone" aria-hidden="true">🏗️</span>
+          <HardHat className="servico-icone" size={26} aria-hidden="true" />
           <h3 className="servico-titulo">Treinamentos em NRs e Máquinas</h3>
           <p className="servico-texto">
             Capacitação, reciclagem e certificação para operadores de
@@ -24,7 +26,7 @@ function Servicos() {
 
                 {/* Pilar 2 - Consultoria */}
                 <div className="servico-card">
-          <span className="servico-icone" aria-hidden="true">📋</span>
+          <ClipboardCheck className="servico-icone" size={26} aria-hidden="true" />
           <h3 className="servico-titulo">Consultoria Empresarial</h3>
           <p className="servico-texto">
             Diagnóstico, documentação e adequação da sua empresa às exigências

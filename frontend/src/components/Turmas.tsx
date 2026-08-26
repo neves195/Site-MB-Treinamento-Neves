@@ -1,3 +1,5 @@
+import { Image as ImageIcon, Maximize2 } from 'lucide-react';
+
 const turmas = [ 
     { id: 1, titulo: 'Turma de Empilhadeira - Jul/2026', local: 'Prática em pátio logístico' },
     { id: 2, titulo: 'Turma de Ponte Rolante - Jun/2026', local: 'Treinamento in company' },
@@ -11,14 +13,14 @@ function Turmas() {
     return (
         <section id="turmas" className="container turmas">
             <p className="secao-eyebrow">Nossas Turmas</p>
-            <h2 className="secao-titulo">Treinamento de verdade, com Máquina de verdade</h2>
+            <h2 className="secao-titulo">Direto do campo, treinamento em ação</h2>
 
                   <div className="turmas-grid">
         {turmas.map((turma) => (
           <div key={turma.id} className="turma-card">
-            <span className="turma-expandir" aria-hidden="true">⤢</span>
+            <span className="turma-expandir" aria-hidden="true"><Maximize2 size={16} /></span>
             <div className="turma-imagem">
-              <span aria-hidden="true">🖼️</span>
+             <ImageIcon size={34} aria-hidden="true" />
             </div>
             <div className="turma-legenda">
               <strong>{turma.titulo}</strong>

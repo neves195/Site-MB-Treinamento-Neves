@@ -1,4 +1,5 @@
 import { getLinkWhatsapp } from '../config';
+import { ShieldCheck, Check } from "lucide-react";
 
 function Hero() {
   const mensagem =
@@ -10,15 +11,15 @@ function Hero() {
       <div className="hero-conteudo">
         {/* Coluna esquerda: o texto */}
         <div className="hero-texto">
-          <span className="hero-badge">🛡️ Referência em Segurança do Trabalho</span>
+          <span className="hero-badge"><ShieldCheck size={14} /> Referência em Segurança do Trabalho</span>
 
           <h1 className="hero-titulo">
-            Opere máquinas com segurança e com <span className="destaque"> certificado na hora</span>.
+            Equipes preparadas. <span className="destaque">Empresas protegidas.</span>
           </h1>
 
           <p className="hero-subtitulo">
-            Capacitação com aulas práticas diretamente nos equipamentos, 
-            focada no desenvolvimento profissional e na segurança durante a operação.
+            Treinamentos em NRs e Segurança do Trabalho para profissionais e empresas:
+            equipes mais capacitadas, riscos prevenidos e carreiras prontas para o mercado.
           </p>
 
           <div className="hero-botoes">
@@ -31,7 +32,7 @@ function Hero() {
           </div>
 
           <div className="hero-tags">
-            <span className="hero-tag hero-tag-ok">✓ Certificado na hora</span>
+            <span className="hero-tag hero-tag-ok"><Check size={14} /> Certificado na hora</span>
             <span className="hero-tag">In company em todo o Brasil · Turmas em Agudos/SP</span>
           </div>
         </div>

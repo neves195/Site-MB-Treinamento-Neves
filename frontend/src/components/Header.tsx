@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { getLinkWhatsapp } from "../config";
+import { X, Moon, Sun, Menu } from "lucide-react";
 
 function Header() {
     const [menuAberto, setMenuAberto] = useState(false);
@@ -36,7 +37,7 @@ function Header() {
             {/* Esquerda: logo */}
             <div className="header-logo">
            <img 
-           src="/logo-branca.png"
+           src="/logo-nova.jpeg"
            alt="MB Consultoria Neves"
            className="header-logo-img"
            />
@@ -46,7 +47,7 @@ function Header() {
             <nav className={`header-nav${menuAberto ? ' aberto' : ''}`}>
             {menuAberto && (
             <button className="btn-fechar-menu" onClick={() => setMenuAberto(false)}>
-                    ✕
+                    <X size={26} />
                 </button>
             )}
             <a href="#servicos" onClick={() => setMenuAberto(false)}>Serviços</a>
@@ -64,10 +65,10 @@ function Header() {
                 onClick={alterarTema}
                 aria-label="Alterar tema"
                 >
-                    {tema === 'claro' ? '🌙' : '☀️'}
+                    {tema === 'claro' ? <Moon size={18} /> : <Sun size={18} />} 
                 </button>
                 <button className="btn-hamburger" onClick={() => setMenuAberto(true)} aria-label="Abrir menu">
-                ☰
+                    <Menu size={26} />
                 </button>
                 <a
                     className="btn-whatsapp"
