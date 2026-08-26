@@ -11,6 +11,7 @@ import Publico from './components/Publico';
 import Diferenciais from './components/DIferenciais';
 import Depoimentos from './components/Depoimentos';
 import FAQ from './components/FAQ';
+import Parceiros from './components/Parceiros';
 
 import Turmas from './components/Turmas';
 
@@ -34,6 +35,10 @@ function App() {
 
       <Reveal>
         <Diferenciais />
+      </Reveal>
+
+      <Reveal>
+        <Parceiros />
       </Reveal>
 
       <Reveal>
