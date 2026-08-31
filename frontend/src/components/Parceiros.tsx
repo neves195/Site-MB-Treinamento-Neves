@@ -4,14 +4,9 @@ import { Building2 } from 'lucide-react';
 const parceiros = [
     { id: 1, nome: 'JC Montagem Industrial', logo: '/parceiros/logo-jc.jpeg' },
     { id: 2, nome: 'Pré-Vale Pré Moldados', logo: '/parceiros/logo-prevale.png' },
-    { id: 3, nome: 'Empresa Parceira 3' },
-    { id: 4, nome: 'Empresa Parceira 4' },
-    { id: 5, nome: 'Empresa Parceira 5' },
-    { id: 6, nome: 'Empresa Parceira 6' },
-    { id: 7, nome: 'Empresa Parceira 7' },
-    { id: 8, nome: 'Empresa Parceira 8' },
-    { id: 9, nome: 'Empresa Parceira 9' },
-    { id: 10, nome: 'Empresa Parceira 10' },
+    { id: 3, nome: 'Imediato Nextey', logo: '/parceiros/logo-imediato.png' },
+    { id: 4, nome: 'Parceiros', logo: '' }, 
+    { id: 5, nome: 'Parceiros', logo: '' },
 ];
 
 function Parceiros() {
