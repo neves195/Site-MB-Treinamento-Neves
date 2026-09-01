@@ -1,0 +1,647 @@
+<title>MB na AWS</title>
+<style>
+  :root{
+    --bg:#EEF2F8; --surface:#FFFFFF; --surface-2:#F4F7FC; --surface-3:#E7EDF6;
+    --border:#D3DCEA; --border-2:#C2CEE0;
+    --ink:#0C1A2E; --ink-2:#2C3E58; --muted:#5B6E89;
+    --accent:#2563EB; --accent-soft:#3B82F6; --accent-ghost:rgba(37,99,235,.09);
+    --safety:#177A3E; --safety-ghost:rgba(23,122,62,.10);
+    --hazard:#B4530A; --hazard-ghost:rgba(180,83,10,.10);
+    --shadow:0 1px 2px rgba(16,34,60,.06),0 8px 30px rgba(16,34,60,.07);
+    --grid-line:rgba(37,99,235,.07);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#080F1C; --surface:#0F1B2E; --surface-2:#132239; --surface-3:#16273F;
+      --border:rgba(255,255,255,.09); --border-2:rgba(255,255,255,.14);
+      --ink:#F4F8FD; --ink-2:#C9D6E8; --muted:#8598B4;
+      --accent:#3B82F6; --accent-soft:#60A5FA; --accent-ghost:rgba(59,130,246,.14);
+      --safety:#4ADE80; --safety-ghost:rgba(74,222,128,.13);
+      --hazard:#FBBF24; --hazard-ghost:rgba(251,191,36,.13);
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.35);
+      --grid-line:rgba(96,165,250,.08);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#EEF2F8; --surface:#FFFFFF; --surface-2:#F4F7FC; --surface-3:#E7EDF6;
+    --border:#D3DCEA; --border-2:#C2CEE0;
+    --ink:#0C1A2E; --ink-2:#2C3E58; --muted:#5B6E89;
+    --accent:#2563EB; --accent-soft:#3B82F6; --accent-ghost:rgba(37,99,235,.09);
+    --safety:#177A3E; --safety-ghost:rgba(23,122,62,.10);
+    --hazard:#B4530A; --hazard-ghost:rgba(180,83,10,.10);
+    --shadow:0 1px 2px rgba(16,34,60,.06),0 8px 30px rgba(16,34,60,.07);
+    --grid-line:rgba(37,99,235,.07);
+  }
+  :root[data-theme="dark"]{
+    --bg:#080F1C; --surface:#0F1B2E; --surface-2:#132239; --surface-3:#16273F;
+    --border:rgba(255,255,255,.09); --border-2:rgba(255,255,255,.14);
+    --ink:#F4F8FD; --ink-2:#C9D6E8; --muted:#8598B4;
+    --accent:#3B82F6; --accent-soft:#60A5FA; --accent-ghost:rgba(59,130,246,.14);
+    --safety:#4ADE80; --safety-ghost:rgba(74,222,128,.13);
+    --hazard:#FBBF24; --hazard-ghost:rgba(251,191,36,.13);
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.35);
+    --grid-line:rgba(96,165,250,.08);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.6;font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:ui-monospace,"SFMono-Regular","Cascadia Code",Menlo,Consolas,monospace}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px}
+
+  /* ---- Cover ---- */
+  .cover{
+    position:relative;overflow:hidden;
+    margin:0 -22px 46px;padding:56px 22px 40px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
+  }
+  .cover::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),
+                     linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+    background-size:26px 26px;
+    mask-image:radial-gradient(120% 120% at 85% -10%,#000 30%,transparent 72%);
+    -webkit-mask-image:radial-gradient(120% 120% at 85% -10%,#000 30%,transparent 72%);
+  }
+  .cover>*{position:relative}
+  .eyebrow{
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin:0 0 14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
+  h1{
+    font-size:clamp(28px,5vw,44px);line-height:1.08;letter-spacing:-.02em;
+    font-weight:800;margin:0;text-wrap:balance;color:var(--ink);
+  }
+  .subtitle{font-size:clamp(16px,2.4vw,19px);color:var(--muted);margin:14px 0 0;max-width:60ch}
+  .meta{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+    margin-top:34px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  }
+  .meta div{background:var(--surface);padding:13px 16px}
+  .meta dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 3px}
+  .meta dd{margin:0;font-size:14.5px;font-weight:600;color:var(--ink-2)}
+  .badge-status{
+    display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
+    color:var(--safety);background:var(--safety-ghost);
+    border:1px solid color-mix(in srgb,var(--safety) 35%,transparent);
+    padding:3px 11px;border-radius:999px;
+  }
+  .badge-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--safety)}
+
+  /* ---- Sections ---- */
+  section{margin-top:44px}
+  .sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:18px}
+  .sec-num{
+    font-size:13px;font-weight:600;color:var(--accent);
+    border:1px solid var(--border-2);border-radius:8px;padding:3px 9px;flex-shrink:0;
+    background:var(--accent-ghost);
+  }
+  h2{font-size:22px;letter-spacing:-.01em;font-weight:750;margin:0;color:var(--ink);text-wrap:balance}
+  h2 .h2-sub{display:block;font-size:13.5px;font-weight:400;color:var(--muted);letter-spacing:0;margin-top:3px}
+  h3{color:var(--ink)}
+  p{margin:0 0 14px;color:var(--ink-2);max-width:68ch}
+  .lead{font-size:17px}
+  strong{color:var(--ink);font-weight:650}
+  a{color:var(--accent);text-underline-offset:3px}
+
+  /* ---- Tables ---- */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--surface);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+  thead th{background:var(--surface-3);color:var(--ink);font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:650}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:var(--surface-2)}
+  .code-cell{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:var(--accent-soft);font-weight:600;white-space:nowrap}
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* ---- Two-col cards ---- */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.cols{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 12px;font-size:15px;display:flex;align-items:center;gap:9px}
+  .card ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .card li{position:relative;padding-left:24px;font-size:14.5px;color:var(--ink-2)}
+  .card li::before{position:absolute;left:0;top:1px;font-size:14px}
+  .yes li::before{content:"✓";color:var(--safety);font-weight:700}
+  .no li::before{content:"✕";color:var(--muted)}
+  .tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:6px}
+  .tag-in{color:var(--safety);background:var(--safety-ghost)}
+  .tag-out{color:var(--muted);background:var(--surface-3)}
+  .tag-rec{color:var(--accent-soft);background:var(--accent-ghost)}
+
+  /* ---- Architecture / flow diagram ---- */
+  .arch{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px 20px;box-shadow:var(--shadow);overflow-x:auto}
+  .arch-inner{min-width:520px;display:flex;flex-direction:column;align-items:center;gap:0}
+  .actors{display:flex;gap:60px;justify-content:center;margin-bottom:6px}
+  .actor{font-size:13px;font-weight:600;color:var(--muted);text-align:center}
+  .actor .mono{font-size:11px;display:block;color:var(--accent);letter-spacing:.05em;margin-top:2px}
+  .layer{
+    width:100%;max-width:560px;border-radius:12px;padding:15px 18px;text-align:center;
+    border:1px solid var(--border-2);background:var(--surface-2);
+  }
+  .layer .lname{font-weight:700;font-size:15px;color:var(--ink)}
+  .layer .ldesc{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .layer.front{border-color:color-mix(in srgb,var(--accent) 40%,transparent);background:var(--accent-ghost)}
+  .layer.back{border-color:color-mix(in srgb,var(--accent) 50%,transparent);background:var(--accent-ghost)}
+  .layer.back .lname{color:var(--accent-soft)}
+  .layer.future{border-style:dashed;opacity:.85}
+  .connector{width:2px;height:26px;background:var(--border-2);position:relative}
+  .connector span{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:10.5px;color:var(--muted);white-space:nowrap;font-family:ui-monospace,monospace}
+  .stores{display:flex;gap:16px;width:100%;max-width:560px}
+  .stores .layer{flex:1}
+  .split{width:60%;max-width:340px;height:26px;position:relative}
+  .split::before,.split::after{content:"";position:absolute;top:0;width:2px;height:13px;background:var(--border-2)}
+  .split::before{left:25%}.split::after{right:25%}
+  .split i{position:absolute;top:13px;left:25%;right:25%;height:2px;background:var(--border-2)}
+
+  .note{font-size:13px;color:var(--muted);margin-top:16px;padding:12px 16px;border-left:3px solid var(--accent);background:var(--accent-ghost);border-radius:0 8px 8px 0}
+  .note.warn{border-left-color:var(--hazard);background:var(--hazard-ghost)}
+  .note.ok{border-left-color:var(--safety);background:var(--safety-ghost)}
+
+  /* ---- Steps ---- */
+  .steps{display:flex;flex-direction:column;gap:14px;counter-reset:st;margin:18px 0}
+  .step{display:flex;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+  .step .sn{counter-increment:st;flex-shrink:0;width:34px;height:34px;border-radius:9px;background:var(--accent-ghost);color:var(--accent);display:grid;place-items:center;font-weight:800;font-family:ui-monospace,monospace;font-size:14px}
+  .step .sn::before{content:counter(st)}
+  .step .sbody{min-width:0;flex:1}
+  .step h4{margin:0 0 6px;font-size:15px;color:var(--ink)}
+  .step p{margin:0 0 10px;font-size:14px;color:var(--ink-2)}
+  .step p:last-child{margin-bottom:0}
+
+  /* ---- Code blocks ---- */
+  .code-label{
+    font-family:ui-monospace,monospace;font-size:11.5px;letter-spacing:.04em;color:var(--muted);
+    background:var(--surface-3);border:1px solid var(--border);border-bottom:none;
+    padding:7px 14px;border-radius:10px 10px 0 0;display:inline-flex;gap:8px;align-items:center;
+  }
+  .code-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--hazard);box-shadow:12px 0 0 var(--muted),24px 0 0 var(--safety)}
+  pre.code{
+    margin:0 0 14px;background:var(--surface-3);border:1px solid var(--border);border-radius:0 10px 10px 10px;
+    padding:14px 16px;overflow-x:auto;font-family:ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;
+    font-size:12.8px;line-height:1.65;color:var(--ink-2);
+  }
+  pre.code + .code-label{margin-top:14px}
+  .code-block + .code-label{margin-top:14px}
+  .code-block{margin-bottom:14px}
+  .code .c{color:var(--muted)}
+  .code .k{color:var(--accent-soft)}
+  kbd.cmd{font-family:ui-monospace,monospace;font-size:.88em;color:var(--accent-soft);background:var(--accent-ghost);border:1px solid var(--border-2);border-radius:5px;padding:1px 6px}
+
+  /* ---- Checklist ---- */
+  .checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .checklist li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink-2)}
+  .checklist .box{flex-shrink:0;width:19px;height:19px;border:2px solid var(--border-2);border-radius:5px;margin-top:2px}
+
+  /* ---- Glossary ---- */
+  .gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .gloss div{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:13px 15px}
+  .gloss dt{font-weight:700;font-size:14px;color:var(--accent-soft);font-family:ui-monospace,monospace;margin-bottom:3px}
+  .gloss dd{margin:0;font-size:13.5px;color:var(--ink-2)}
+
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media(prefers-reduced-motion:no-preference){
+    tbody tr td{transition:background .15s ease}
+  }
+</style>
+
+<div class="cover">
+  <div class="wrap" style="padding-bottom:0;padding-left:0;padding-right:0;max-width:880px">
+    <p class="eyebrow">Guia Operacional · Infraestrutura</p>
+    <h1>Deploy na AWS</h1>
+    <p class="subtitle">Como publicar o site MB Consultoria e Treinamento Neves na AWS — hoje (vitrine estática) e amanhã (API Spring Boot + banco, quando a Fase 2 existir).</p>
+    <dl class="meta">
+      <div><dt>Projeto</dt><dd>MB Consultoria Neves</dd></div>
+      <div><dt>Estado atual</dt><dd>Fase 1 — Frontend</dd></div>
+      <div><dt>Cobertura</dt><dd>Frontend + Backend (futuro)</dd></div>
+      <div><dt>Custo-alvo</dt><dd><span class="badge-status">Free Tier</span></dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">01</span><h2>Visão Geral do Guia</h2></div>
+    <p class="lead">Hoje o repositório só tem a <strong>Fase 1</strong>: um frontend estático (React + Vite), sem backend. Este guia cobre a hospedagem desse estado atual — e já deixa o caminho pronto para quando a <strong>Fase 2</strong> (API Spring Boot + PostgreSQL, definida no <a href="./Documento-Engenharia-Sistema.md">documento de engenharia</a>) existir.</p>
+    <div class="cols">
+      <div class="card">
+        <h3><span class="tag tag-in">Fazer agora</span> Parte 1</h3>
+        <ul class="yes">
+          <li>Conta AWS protegida (MFA + IAM)</li>
+          <li>Alarme de orçamento configurado</li>
+          <li>Frontend publicado com HTTPS e domínio próprio</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="tag tag-out">Quando a API existir</span> Parte 2</h3>
+        <ul class="no">
+          <li>Backend Spring Boot em Elastic Beanstalk</li>
+          <li>Banco PostgreSQL em RDS</li>
+          <li>Domínio da API + CI/CD do backend</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">Este documento fica em <span class="code-cell mono">docs/</span>, junto do <a href="./Documento-Engenharia-Sistema.md">Documento de Engenharia</a> — trata da <strong>infraestrutura</strong>; aquele trata da <strong>arquitetura de software</strong>.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">02</span><h2>Antes de Começar<span class="h2-sub">Conta, custos e acesso</span></h2></div>
+    <p>Três coisas antes de tocar em qualquer serviço — evitam tanto uma conta comprometida quanto uma surpresa na fatura.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Ative o MFA na conta <span class="code-cell">root</span></h4>
+          <p>A conta root da AWS pode fazer <em>qualquer coisa</em>, sem limite. Ative a autenticação em dois fatores nela (IAM → Security credentials → MFA) e nunca mais faça login nela no dia a dia.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Crie um usuário IAM para o trabalho diário</h4>
+          <p>Em <span class="code-cell">IAM → Users</span>, crie um usuário (ex.: <span class="code-cell">joao-admin</span>) com a policy gerenciada <span class="code-cell">AdministratorAccess</span> — só para você, nunca para uma aplicação. É esse usuário (não o root) que você usa para logar no console e configurar o AWS CLI.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Configure um alarme de orçamento</h4>
+          <p>Em <span class="code-cell">Billing → Budgets</span>, crie um budget de valor baixo (ex.: US$ 5) com alerta por e-mail em 80% e 100%. Leva 2 minutos e é a rede de segurança contra qualquer recurso esquecido ligado.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Instale e autentique o AWS CLI</h4>
+          <div class="code-label">terminal</div>
+          <pre class="code"># instala (Linux)
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip && sudo ./aws/install
+
+# autentica com o usuário IAM criado acima
+aws configure
+<span class="c"># Access Key ID, Secret Access Key, região (ex.: sa-east-1), formato: json</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="note warn">Nunca coloque <em>Access Key</em>/<em>Secret Key</em> em código versionado. Se algo for commitado por engano, revogue a chave na hora em <span class="code-cell">IAM → Users → Security credentials</span>.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">03</span><h2>Panorama dos Serviços<span class="h2-sub">O que vamos usar, e onde</span></h2></div>
+    <p>A mesma separação de camadas do <a href="./Documento-Engenharia-Sistema.md">documento de engenharia</a> — frontend, backend, banco, imagens — só que cada caixa agora é um serviço AWS específico.</p>
+    <div class="arch">
+      <div class="arch-inner">
+        <div class="actors">
+          <div class="actor">Visitante<span class="mono">HTTPS</span></div>
+          <div class="actor">Admin<span class="mono">/painel</span></div>
+        </div>
+        <div class="connector"><span>Route 53 + ACM</span></div>
+        <div class="layer front">
+          <div class="lname">Amplify Hosting (CloudFront + S3)</div>
+          <div class="ldesc">Frontend React — existe hoje</div>
+        </div>
+        <div class="connector"><span>HTTPS · api.seudominio.com</span></div>
+        <div class="layer back future">
+          <div class="lname">Elastic Beanstalk — Spring Boot</div>
+          <div class="ldesc">API REST — Fase 2, ainda não existe</div>
+        </div>
+        <div class="split"><i></i></div>
+        <div class="stores">
+          <div class="layer future">
+            <div class="lname">RDS PostgreSQL</div>
+            <div class="ldesc">cursos · turmas · admin</div>
+          </div>
+          <div class="layer future">
+            <div class="lname">S3 (ou Cloudinary)</div>
+            <div class="ldesc">fotos das turmas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note">Caixas tracejadas = <strong>Parte 2</strong>, só entram em cena quando o backend existir. A caixa azul sólida (frontend) é o que você publica hoje, na seção seguinte.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">04</span><h2>Parte 1 — Publicar o Frontend<span class="h2-sub">O que já existe no repositório</span></h2></div>
+    <p>Duas formas válidas de hospedar um SPA estático na AWS. A recomendação é <strong>AWS Amplify Hosting</strong>: menos peças para gerenciar, CI/CD automático a cada <span class="code-cell">git push</span>, e HTTPS de graça.</p>
+    <div class="cols">
+      <div class="card">
+        <h3><span class="tag tag-rec">Recomendado</span> Amplify Hosting</h3>
+        <ul class="yes">
+          <li>Conecta direto no GitHub — build e deploy automáticos</li>
+          <li>CDN (CloudFront) e SSL inclusos, sem configurar nada</li>
+          <li>Preview de cada branch/PR</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="tag tag-out">Alternativa</span> S3 + CloudFront manual</h3>
+        <ul class="no">
+          <li>Mais peças: bucket, OAC, distribuição, invalidação de cache</li>
+          <li>Mais controle fino — útil só se o Amplify não servir seu caso</li>
+          <li>Requer pipeline próprio (GitHub Actions) para o deploy</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:16px;margin:28px 0 10px">4.1 · Passo a passo — Amplify Hosting</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Confirme que o repositório está no GitHub</h4>
+          <p>O Amplify builda direto da branch <span class="code-cell">main</span>. Se o projeto ainda for só local, crie o repositório remoto e dê push antes de continuar.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Console AWS → Amplify → <span class="code-cell">New app → Host web app</span></h4>
+          <p>Autorize o GitHub, selecione o repositório <span class="code-cell">Site-MB-Treinamento-Neves</span> e a branch <span class="code-cell">main</span>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Configure o build — o app vive em <span class="code-cell">frontend/</span></h4>
+          <p>Como o projeto é um monorepo (site na raiz, código em <span class="code-cell">frontend/</span>), aponte o <em>app root</em> para <span class="code-cell">frontend</span> ou cole este <span class="code-cell">amplify.yml</span> na raiz do repositório:</p>
+          <div class="code-label">amplify.yml</div>
+          <pre class="code"><span class="k">version:</span> 1
+<span class="k">applications:</span>
+  - <span class="k">appRoot:</span> frontend
+    <span class="k">frontend:</span>
+      <span class="k">phases:</span>
+        <span class="k">preBuild:</span>
+          <span class="k">commands:</span>
+            - npm ci
+        <span class="k">build:</span>
+          <span class="k">commands:</span>
+            - npm run build
+      <span class="k">artifacts:</span>
+        <span class="k">baseDirectory:</span> dist
+        <span class="k">files:</span>
+          - <span class="k">'</span>**/*<span class="k">'</span>
+      <span class="k">cache:</span>
+        <span class="k">paths:</span>
+          - node_modules/**/*</pre>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Deploy</h4>
+          <p>Clique em <span class="code-cell">Save and deploy</span>. Em poucos minutos o site fica no ar em um endereço <span class="code-cell">https://main.xxxxxxx.amplifyapp.com</span>, já com HTTPS.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Domínio próprio (opcional)</h4>
+          <p>Em <span class="code-cell">App settings → Domain management</span>, adicione seu domínio. Se ele já está no Route 53, o Amplify cria os registros DNS e o certificado ACM sozinho — só confirmar.</p>
+        </div>
+      </div>
+    </div>
+    <div class="note ok">A partir daqui, todo <span class="code-cell">git push</span> na <span class="code-cell">main</span> gera um novo deploy automático. Sem servidor para você gerenciar.</div>
+
+    <h3 style="font-size:16px;margin:28px 0 10px">4.2 · Alternativa — S3 + CloudFront (manual)</h3>
+    <p>Use este caminho só se precisar de controle que o Amplify não oferece. Resumo dos passos:</p>
+    <div class="steps">
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Bucket S3 privado</h4>
+          <p>Crie um bucket (ex.: <span class="code-cell">mb-consultoria-site</span>) com <em>Block Public Access</em> ligado — o bucket nunca fica público diretamente.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Distribuição CloudFront com OAC</h4>
+          <p>Crie uma distribuição apontando para o bucket, usando <em>Origin Access Control</em> (OAC) — só o CloudFront lê o bucket, o público nunca acessa o S3 direto.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Certificado ACM + domínio</h4>
+          <p>Peça o certificado em <strong><span class="code-cell">us-east-1</span></strong> (obrigatório para CloudFront), associe à distribuição e aponte o Route 53 para ela.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Deploy via GitHub Actions</h4>
+          <div class="code-label">.github/workflows/deploy-frontend.yml</div>
+          <pre class="code"><span class="k">name:</span> Deploy Frontend
+<span class="k">on:</span>
+  <span class="k">push:</span>
+    <span class="k">branches:</span> [main]
+    <span class="k">paths:</span> [<span class="k">'</span>frontend/**<span class="k">'</span>]
+<span class="k">jobs:</span>
+  <span class="k">deploy:</span>
+    <span class="k">runs-on:</span> ubuntu-latest
+    <span class="k">steps:</span>
+      - <span class="k">uses:</span> actions/checkout@v4
+      - <span class="k">uses:</span> actions/setup-node@v4
+        <span class="k">with:</span> { <span class="k">node-version:</span> 20 }
+      - <span class="k">run:</span> cd frontend && npm ci && npm run build
+      - <span class="k">uses:</span> aws-actions/configure-aws-credentials@v4
+        <span class="k">with:</span>
+          <span class="k">aws-region:</span> sa-east-1
+          <span class="k">role-to-assume:</span> ${{ secrets.AWS_DEPLOY_ROLE }}
+      - <span class="k">run:</span> aws s3 sync frontend/dist s3://mb-consultoria-site --delete
+      - <span class="k">run:</span> aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DIST_ID }} --paths "/*"</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">05</span><h2>Parte 2 — Backend (Fase 2)<span class="h2-sub">Quando a API Spring Boot existir</span></h2></div>
+    <div class="note warn">Esta seção é <strong>preparação</strong>, não uma tarefa de hoje. Volte aqui quando o backend do <a href="./Documento-Engenharia-Sistema.md">documento de engenharia</a> (Spring Boot + PostgreSQL) estiver escrito.</div>
+    <p>Para uma API Spring Boot de porte pequeno/médio, <strong>Elastic Beanstalk</strong> é o caminho mais simples: você envia um <span class="code-cell">.jar</span>, a AWS cuida de EC2, monitoramento e (opcionalmente) balanceamento de carga.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Crie o banco primeiro — RDS PostgreSQL</h4>
+          <p>Console → RDS → Create database → PostgreSQL → template <em>Free tier</em> → classe <span class="code-cell">db.t3.micro</span> (ou <span class="code-cell">t4g.micro</span>). Em <strong>Connectivity</strong>, marque <em>Public access: No</em> — o banco só deve ser alcançável de dentro da VPC, nunca da internet.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Ambiente Elastic Beanstalk — plataforma Java</h4>
+          <p>Console → Elastic Beanstalk → Create application → plataforma <span class="code-cell">Java (Corretto)</span>. Para o menor custo em desenvolvimento, escolha <em>Environment type: Single instance</em> (sem load balancer). Migre para <em>Load balanced</em> só quando precisar de alta disponibilidade real.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Libere só a porta 5432 para o Beanstalk</h4>
+          <p>No <em>Security Group</em> do RDS, adicione uma regra de entrada na porta <span class="code-cell">5432</span> que aceite tráfego apenas do <em>security group</em> das instâncias EC2 do Beanstalk — nunca <span class="code-cell">0.0.0.0/0</span>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Credenciais como variáveis de ambiente</h4>
+          <p>Em <span class="code-cell">Configuration → Software</span>, defina as propriedades de ambiente — nunca no <span class="code-cell">application.properties</span> commitado:</p>
+          <div class="code-label">variáveis de ambiente</div>
+          <pre class="code">SPRING_DATASOURCE_URL=jdbc:postgresql://SEU-ENDPOINT-RDS:5432/mb_consultoria
+SPRING_DATASOURCE_USERNAME=mb_admin
+SPRING_DATASOURCE_PASSWORD=<span class="c">valor gerado, não versionado</span>
+JWT_SECRET=<span class="c">chave longa e aleatória, só nesta variável</span></pre>
+          <p>Para produção, migre <span class="code-cell">JWT_SECRET</span> e a senha do banco para o <strong>AWS Secrets Manager</strong>, e leia via SDK — as variáveis de ambiente do EB já resolvem para o início.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>Deploy do <span class="code-cell">.jar</span></h4>
+          <div class="code-label">terminal</div>
+          <pre class="code">cd backend
+./mvnw clean package -DskipTests
+eb init -p corretto-21 mb-consultoria-api
+eb create mb-api-env --single --envvars SPRING_PROFILES_ACTIVE=prod
+eb deploy</pre>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn mono"></div>
+        <div class="sbody">
+          <h4>CORS restrito ao domínio do frontend</h4>
+          <p>No Spring Security, libere apenas a origem real do site (Amplify ou seu domínio) — nunca <span class="code-cell">*</span>. Isso é exatamente a camada "CORS" já prevista no plano de segurança do documento de engenharia.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:16px;margin:28px 0 10px">5.1 · Fotos das turmas — S3 ou Cloudinary</h3>
+    <p>O documento de engenharia já previu um serviço externo de imagens (ex.: Cloudinary) para o banco não guardar arquivos pesados. Duas opções válidas, sem contradizer aquele plano:</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Opção</th><th>Quando usar</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Manter Cloudinary</strong></td><td>Mais simples para upload direto do navegador (widget pronto, transformação de imagem inclusa).</td></tr>
+          <tr><td><strong>Trocar por S3 + CloudFront</strong></td><td>Já que o resto está na AWS — um bucket + URLs assinadas via backend, sem outro fornecedor para gerenciar.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">06</span><h2>Domínio e HTTPS<span class="h2-sub">Route 53 + ACM</span></h2></div>
+    <p>Um domínio, dois subdomínios: o site na raiz, a API futura em <span class="code-cell">api.</span></p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Registro</th><th>Aponta para</th><th>Quando</th></tr></thead>
+        <tbody>
+          <tr><td class="code-cell">seudominio.com</td><td>Amplify Hosting (alias)</td><td>Parte 1 — hoje</td></tr>
+          <tr><td class="code-cell">www.seudominio.com</td><td>Amplify Hosting (alias)</td><td>Parte 1 — hoje</td></tr>
+          <tr><td class="code-cell">api.seudominio.com</td><td>Elastic Beanstalk (CNAME)</td><td>Parte 2 — quando existir</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">Compre o domínio direto no Route 53 (Console → Route 53 → Registered domains) ou transfira um domínio existente. O certificado ACM do frontend precisa estar em <span class="code-cell">us-east-1</span>; o da API fica na mesma região do Beanstalk.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">07</span><h2>Segurança na Nuvem<span class="h2-sub">A mesma defesa em camadas, agora em infraestrutura</span></h2></div>
+    <p>O <a href="./Documento-Engenharia-Sistema.md">plano de segurança</a> do documento de engenharia continua valendo — aqui está o que cada camada vira em recursos AWS.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Camada (doc. de engenharia)</th><th>Na AWS</th></tr></thead>
+        <tbody>
+          <tr><td>HTTPS</td><td class="code-cell">ACM — certificado grátis, renovação automática</td></tr>
+          <tr><td>Menor privilégio</td><td class="code-cell">IAM — policies específicas por serviço, nunca chave de root em app</td></tr>
+          <tr><td>Segredos (senha, JWT)</td><td class="code-cell">Secrets Manager ou variáveis de ambiente do Beanstalk</td></tr>
+          <tr><td>Banco não exposto</td><td class="code-cell">RDS com "Public access: No" + security group restrito</td></tr>
+          <tr><td>CORS</td><td class="code-cell">Configurado no Spring Security, origem única</td></tr>
+          <tr><td>Rate limiting no login</td><td class="code-cell">AWS WAF (rate-based rule) na frente do Beanstalk/ALB, se necessário</td></tr>
+          <tr><td>Monitoramento</td><td class="code-cell">CloudWatch — alarmes de erro 5xx e CPU</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">08</span><h2>Custos e Free Tier<span class="h2-sub">Valores de referência — confira sempre a página oficial</span></h2></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Serviço</th><th>Free tier (12 meses)</th><th>Após o free tier</th></tr></thead>
+        <tbody>
+          <tr><td>Amplify Hosting</td><td class="num">~1.000 min build + 15 GB servidos/mês</td><td class="num">≈ US$ 1–3/mês (site pequeno)</td></tr>
+          <tr><td>Route 53 (domínio)</td><td class="num">não incluso</td><td class="num">≈ US$ 0,50/mês de zona + preço do domínio (~US$ 12–15/ano)</td></tr>
+          <tr><td>EC2 (via Elastic Beanstalk)</td><td class="num">750h/mês, t2/t3.micro</td><td class="num">≈ US$ 7–10/mês (t3.micro)</td></tr>
+          <tr><td>RDS PostgreSQL</td><td class="num">750h/mês, t3/t4g.micro + 20 GB</td><td class="num">≈ US$ 12–15/mês</td></tr>
+          <tr><td>CloudFront</td><td class="num">1 TB saída + 10M requisições (sempre grátis)</td><td class="num">pago por uso acima disso</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn">A Parte 2 completa (EC2 + RDS) sai do free tier depois de 12 meses e passa a custar algo como <strong>US$ 20–30/mês</strong>. Durante o aprendizado, pare o ambiente Beanstalk (<span class="code-cell">eb terminate</span>) e o RDS quando não estiver usando — evita cobrança por instância parada esquecida.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">09</span><h2>Ordem de Execução<span class="h2-sub">Checklist</span></h2></div>
+    <ul class="checklist">
+      <li><span class="box"></span>MFA ativado na conta root + usuário IAM criado</li>
+      <li><span class="box"></span>Alarme de orçamento configurado</li>
+      <li><span class="box"></span>Repositório no GitHub, branch <span class="code-cell mono">main</span></li>
+      <li><span class="box"></span>App Amplify conectado, <span class="code-cell mono">amplify.yml</span> na raiz</li>
+      <li><span class="box"></span>Site no ar em <span class="code-cell mono">*.amplifyapp.com</span></li>
+      <li><span class="box"></span>Domínio próprio ligado (Route 53 + ACM)</li>
+      <li><span class="box"></span><em>— Fase 2 —</em> RDS criado, sem acesso público</li>
+      <li><span class="box"></span><em>— Fase 2 —</em> Elastic Beanstalk publicando a API</li>
+      <li><span class="box"></span><em>— Fase 2 —</em> <span class="code-cell mono">api.seudominio.com</span> apontado e com HTTPS</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">10</span><h2>Referência Rápida<span class="h2-sub">Comandos do dia a dia</span></h2></div>
+    <div class="code-label">terminal</div>
+    <pre class="code"><span class="c"># status do ambiente Beanstalk</span>
+eb status
+eb logs
+
+<span class="c"># sincronizar o frontend manualmente (caminho S3)</span>
+aws s3 sync frontend/dist s3://mb-consultoria-site --delete
+
+<span class="c"># ver alarmes de orçamento ativos</span>
+aws budgets describe-budgets --account-id SEU_ACCOUNT_ID
+
+<span class="c"># desligar o ambiente de backend (evita custo em pausa longa)</span>
+eb terminate mb-api-env</pre>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num mono">11</span><h2>Glossário AWS</h2></div>
+    <dl class="gloss">
+      <div><dt>Amplify Hosting</dt><dd>Serviço que builda e publica um frontend a partir do Git, com CDN e SSL inclusos.</dd></div>
+      <div><dt>S3</dt><dd>Armazenamento de arquivos (bucket) — guarda tanto o site estático quanto imagens.</dd></div>
+      <div><dt>CloudFront</dt><dd>CDN da AWS — entrega o conteúdo a partir do ponto mais perto do visitante.</dd></div>
+      <div><dt>Route 53</dt><dd>Serviço de DNS e registro de domínio da AWS.</dd></div>
+      <div><dt>ACM</dt><dd>Certificate Manager — emite e renova certificados HTTPS de graça.</dd></div>
+      <div><dt>Elastic Beanstalk</dt><dd>Orquestra EC2 + deploy para uma aplicação (aqui, o <span class="mono">.jar</span> do Spring Boot).</dd></div>
+      <div><dt>RDS</dt><dd>Banco de dados gerenciado — aqui, PostgreSQL sem precisar administrar o servidor.</dd></div>
+      <div><dt>Security Group</dt><dd>Firewall por recurso — define quem pode falar com quem, em qual porta.</dd></div>
+      <div><dt>IAM</dt><dd>Controle de identidade e permissões — quem pode fazer o quê na conta.</dd></div>
+      <div><dt>Secrets Manager</dt><dd>Guarda senhas e chaves fora do código, com acesso controlado por IAM.</dd></div>
+    </dl>
+  </section>
+
+  <footer>
+    <span>MB Consultoria e Treinamento Neves</span>
+    <span class="mono">Guia de Deploy na AWS · companion do Documento de Engenharia</span>
+  </footer>
+
+</div>
