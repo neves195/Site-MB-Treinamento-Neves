@@ -877,6 +877,13 @@ h1, h2, h3 {
   place-items: center;
   color: #A39C8F;
 }
+
+.turma-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* Legenda por cima da foto, com degradê escuro pra dar contraste */
 .turma-legenda {
   position: absolute;
