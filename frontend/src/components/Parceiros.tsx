@@ -5,7 +5,7 @@ const parceiros = [
     { id: 1, nome: 'JC Montagem Industrial', logo: '/parceiros/logo-jc.jpeg' },
     { id: 2, nome: 'Pré-Vale Pré Moldados', logo: '/parceiros/logo-prevale.png' },
     { id: 3, nome: 'Imediato Nextey', logo: '/parceiros/logo-imediato.png' },
-    { id: 4, nome: 'Parceiros', logo: '' }, 
+    { id: 4, nome: 'MegaByte', logo: '/parceiros/logo-megabyte.jpg' }, 
     { id: 5, nome: 'Parceiros', logo: '' },
 ];
 
