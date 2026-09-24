@@ -37,7 +37,7 @@ function Header() {
             {/* Esquerda: logo */}
             <div className="header-logo">
            <img 
-           src="/logo-nova.jpeg"
+           src="/logo-simbolo.jpg"
            alt="MB Consultoria Neves"
            className="header-logo-img"
            />

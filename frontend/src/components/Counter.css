@@ -1,0 +1,57 @@
+.counter-container {
+  position: relative;
+  display: inline-block;
+}
+
+.counter-counter {
+  display: flex;
+  overflow: hidden;
+  line-height: 1;
+  font-family: var(--font-titulo);
+}
+
+.counter-digit {
+  position: relative;
+  width: 1ch;
+  font-variant-numeric: tabular-nums;
+}
+
+.counter-number {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Esmaece o topo/fundo da "roldana" de dígitos — some com o corte abrupto
+   dos números vizinhos entrando/saindo. Cor casa com o fundo escuro da
+   seção Números (--ink-bg), onde esse componente é usado. */
+.gradient-container {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.top-gradient,
+.bottom-gradient {
+  position: absolute;
+  width: 100%;
+  height: 10px;
+}
+
+.top-gradient {
+  top: 0;
+  background: linear-gradient(to bottom, var(--ink-bg), transparent);
+}
+
+.bottom-gradient {
+  bottom: 0;
+  background: linear-gradient(to top, var(--ink-bg), transparent);
+}

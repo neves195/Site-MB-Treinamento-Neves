@@ -3,7 +3,8 @@ function Certificado() {
     return (
         <section className="certificado">
             <div className="certificado-box">
-                <GraduationCap className="certificado-icone" size={44} aria-hidden="true" />
+                <div className="certificado-conteudo">
+                <GraduationCap className="certificado-icone" size={36} aria-hidden="true" />
 
                 <h2 className="certificado-titulo">
                     Certificado emitido <span className="destaque-ok">na hora</span> - em 
@@ -16,7 +17,12 @@ function Certificado() {
                     Norma Regulamentadora do curso.
                 </p>
             </div>
-        </section>
+
+            <div className="certificado-imagem">
+                <img src="/certificado-exemplo.png" alt="Exemplo de certificado emitido pela MB Consultoria" />
+            </div>
+        </div>
+    </section>
     );
 }
 

@@ -1,5 +1,12 @@
 import { getLinkWhatsapp } from '../config';
-import { ShieldCheck, Check } from "lucide-react";
+import { ShieldCheck, HardHat, Forklift, Users, ShieldAlert, ArrowDown } from "lucide-react";
+
+const recursos = [
+  { icone: HardHat, titulo: 'NRs', texto: 'Treinamentos regulamentados' },
+  { icone: Forklift, titulo: 'Máquinas', texto: 'Capacitação em equipamentos' },
+  { icone: Users, titulo: 'Empresas', texto: 'Soluções para sua equipe' },
+  { icone: ShieldAlert, titulo: 'Segurança', texto: 'Mais proteção no trabalho' },
+];
 
 function Hero() {
   const mensagem =
@@ -9,7 +16,7 @@ function Hero() {
   return (
     <section className="hero">
       <div className="hero-conteudo">
-        {/* Coluna esquerda: o texto */}
+        {/* Coluna esquerda: texto */}
         <div className="hero-texto">
           <span className="hero-badge"><ShieldCheck size={14} /> Referência em Segurança do Trabalho</span>
 
@@ -31,16 +38,35 @@ function Hero() {
             </a>
           </div>
 
-          <div className="hero-tags">
-            <span className="hero-tag hero-tag-ok"><Check size={14} /> Certificado na hora</span>
-            <span className="hero-tag">In company em todo o Brasil · Turmas em Agudos/SP</span>
+          {/* Faixa de recursos - substitui as tags antigas */}
+          <div className="hero-recursos">
+            {recursos.map((item) => (
+              <div key={item.titulo} className="hero-recurso">
+                <item.icone className="hero-recurso-icone" size={22} aria-hidden="true" />
+                <div>
+                  <strong>{item.titulo}</strong>
+                  <span>{item.texto}</span>
+                </div>
+              </div>
+            ))}
           </div>
+
+          <a href="#servicos" className="hero-scroll">
+            <span className="hero-scroll-seta"><ArrowDown size={16} /></span>
+            Conheça mais sobre a MB
+          </a>
         </div>
 
-        {/* Coluna direita: imagem + card flutuante "15+ anos" */}
+        {/* Coluna direita: foto recortada + selo + frase */}
         <div className="hero-visual">
           <div className="hero-imagem">
-            </div>
+            <img src="/hero-visual.jpg" alt="Treinamento prático da MB Consultoria" />
+          </div>
+
+          <span className="hero-manuscrito">
+            Treinamento é<br />investimento<br />em pessoas!
+          </span>
+
           <div className="hero-flutuante">
             <strong>15+ anos</strong>
             <span>de experiência</span>
