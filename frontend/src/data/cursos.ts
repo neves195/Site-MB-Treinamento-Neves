@@ -11,6 +11,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Formação completa para operadores de empilhadeira: inspeção pré-operacional, estabilidade de carga e prática supervisionada.',
     icone: 'empilhadeira.svg',
+    imagem: '/cursos/empilhadeira.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-11',
@@ -31,6 +32,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Inspeção de cabos e acessórios de içamento, comandos e movimentação de cargas em ambiente fabril.',
     icone: 'ponte-rolante.svg',
+    imagem: '/cursos/ponte-rolante.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-11',
@@ -51,6 +53,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Trabalho em altura conforme a NR-35: permissão de trabalho, análise de risco, cinturão, talabarte e resgate.',
     icone: 'trabalho-altura.svg',
+    imagem: '/cursos/trabalho-altura.jpg',
     ativo: true,
     conteudoProgramatico: [
       'A Norma Regulamentadora NR-35 e responsabilidades',
@@ -71,6 +74,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação teórica e prática conforme a NR-33, para atuação segura como trabalhador autorizado e vigia em espaços confinados.',
     icone: 'espaco-confinado.svg',
+    imagem: '/cursos/espaco-confinado.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-33',
@@ -91,6 +95,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação para trabalho a quente conforme a NR-34, com foco em prevenção de incêndios, explosões e acidentes em operações de solda e corte.',
     icone: 'trabalho-quente.svg',
+    imagem: '/cursos/trabalho-quente.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-34',
@@ -111,6 +116,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Formação para operadores de retroescavadeira: inspeção do equipamento, escavação segura e movimentação de carga.',
     icone: 'retroescavadeira.svg',
+    imagem: '/cursos/retroescavadeira.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-11',
@@ -131,6 +137,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação conforme a NR-12 sobre riscos mecânicos, sistemas de segurança e procedimentos para operação segura de máquinas e equipamentos industriais.',
     icone: 'seguranca-maquinas.svg',
+    imagem: '/cursos/seguranca-maquinas.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-12',
@@ -151,6 +158,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação sobre as condições de segurança e saúde no trabalho na indústria da construção, conforme a NR-18.',
     icone: 'construcao-civil.svg',
+    imagem: '/cursos/construcao-civil.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-18',
@@ -171,6 +179,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação complementar conforme o item 18.7.6 da NR-18 e a NR-34.5, voltada para trabalho a quente na construção civil.',
     icone: 'trabalho-quente-nr18.svg',
+    imagem: '/cursos/trabalho-quente-nr18.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação: item 18.7.6 da NR-18 e NR-34.5',
@@ -191,6 +200,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Formação para operadores de minicarregadeira: inspeção, comandos, estabilidade e prática supervisionada.',
     icone: 'bobcat.svg',
+    imagem: '/cursos/bobcat.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-11',
@@ -211,6 +221,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação para operação de PEMT, com foco em inspeção do equipamento, estabilidade e trabalho em altura.',
     icone: 'pemt.svg',
+    imagem: '/cursos/pemt.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação aplicável à operação de PEMT',
@@ -231,6 +242,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação de brigada de emergência conforme a NR-23, com prevenção, combate a princípio de incêndio, abandono de área e primeiros socorros.',
     icone: 'brigada-incendio.svg',
+    imagem: '/cursos/brigada-incendio.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-23',
@@ -251,6 +263,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação complementar conforme a NR-10, voltada à segurança em instalações e serviços em eletricidade.',
     icone: 'nr10-cep.svg',
+    imagem: '/cursos/nr10-cep.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-10',
@@ -271,6 +284,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação conforme a NR-13 para operadores de caldeiras e vasos de pressão, com foco em riscos, inspeção e procedimentos operacionais.',
     icone: 'caldeira-vaso-pressao.svg',
+    imagem: '/cursos/caldeira-vaso-pressao.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-13',
@@ -291,6 +305,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação conforme a NR-13 voltada especificamente para operação e inspeção de vasos de pressão.',
     icone: 'vaso-pressao.svg',
+    imagem: '/cursos/vaso-pressao.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-13',
@@ -311,6 +326,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação conforme a NR-01 sobre gerenciamento de riscos ocupacionais, com foco em fatores psicossociais relacionados ao trabalho.',
     icone: 'riscos-psicossociais.svg',
+    imagem: '/cursos/riscos-psicossociais.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-01',
@@ -331,6 +347,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação conforme a NR-06 sobre seleção, uso correto, guarda e conservação de equipamentos de proteção individual.',
     icone: 'epi.svg',
+    imagem: '/cursos/epi.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-06',
@@ -351,6 +368,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação sobre requisitos técnicos de segurança para máquinas, equipamentos e ferramentas na construção civil, conforme o Anexo I da NR-18.',
     icone: 'construcao-civil-anexo1.svg',
+    imagem: '/cursos/construcao-civil-anexo1.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação: Anexo I da NR-18',
@@ -371,6 +389,7 @@ export const cursos: Curso[] = [
     descricaoLonga:
       'Capacitação conforme a NR-20 para trabalhadores que atuam em instalações classe III, com foco em prevenção de incêndios e explosões.',
     icone: 'inflamaveis-combustiveis.svg',
+    imagem: '/cursos/inflamaveis-combustiveis.jpg',
     ativo: true,
     conteudoProgramatico: [
       'Legislação e a Norma Regulamentadora NR-20',

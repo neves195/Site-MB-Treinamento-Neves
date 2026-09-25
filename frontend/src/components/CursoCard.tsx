@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Curso } from '../types/curso';
 import { getLinkWhatsapp } from '../config';
 import { createPortal } from 'react-dom';
+import { ImageOff } from 'lucide-react';
 
 interface CursoCardProps {
     curso: Curso;
@@ -9,12 +10,29 @@ interface CursoCardProps {
 
 function CursoCard({ curso }: CursoCardProps) {
     const [aberto, setModalAberto] = useState(false);
+    // Enquanto a foto real não é enviada (ou se o arquivo não existir), cai no placeholder
+    const [semFoto, setSemFoto] = useState(!curso.imagem);
 
     const mensagem = `Olá! Tenho interesse no curso de ${curso.nome} (${curso.nr}). Poderia me passar mais informações?`;
     const linkWhatsapp = getLinkWhatsapp(mensagem);
 
 return (
-    <div className="card">
+    <div className={`card card-${curso.categoria}`}>
+        <div className="card-imagem">
+            {semFoto ? (
+                <span className="card-imagem-placeholder">
+                    <ImageOff size={22} aria-hidden="true" />
+                </span>
+            ) : (
+                <img
+                    src={curso.imagem}
+                    alt={curso.nome}
+                    onError={() => setSemFoto(true)}
+                    loading="lazy"
+                />
+            )}
+        </div>
+
         <span className="card-nr">{curso.nr}</span>
         <h3 className="card-nome">{curso.nome}</h3>
         <p className="card-carga">{curso.cargaHoraria}</p>

@@ -34,12 +34,18 @@ function Header() {
     return (
         
         <header className={`header${rolado ? ' rolado' : ''}`}>
-            {/* Esquerda: logo */}
+            {/* Esquerda: logo — duas versões (texto escuro/claro), o CSS mostra
+                a certa conforme o tema e se o header já rolou (fundo escuro) */}
             <div className="header-logo">
-           <img 
-           src="/logo-simbolo.jpg"
+           <img
+           src="/logo-mb-clara.png"
            alt="MB Consultoria Neves"
-           className="header-logo-img"
+           className="header-logo-img header-logo-clara"
+           />
+           <img
+           src="/logo-mb-escura.png"
+           alt="MB Consultoria Neves"
+           className="header-logo-img header-logo-escura"
            />
         </div>
 
