@@ -11,6 +11,8 @@ export interface CarouselItem {
 export interface CarouselProps {
   items?: CarouselItem[];
   baseWidth?: number;
+  visibleItems?: number;
+  showArrows?: boolean;
   autoplay?: boolean;
   autoplayDelay?: number;
   pauseOnHover?: boolean;
@@ -36,15 +38,16 @@ interface CarouselItemProps {
   itemWidth: number;
   itemHeight: number;
   round: boolean;
+  flat: boolean;
   trackItemOffset: number;
   x: any;
   transition: any;
   onOpenSlide?: (item: CarouselItem, index: number) => void;
 }
 
-function CarouselItem({ item, index, itemWidth, itemHeight, round, trackItemOffset, x, transition, onOpenSlide }: CarouselItemProps) {
+function CarouselItem({ item, index, itemWidth, itemHeight, round, flat, trackItemOffset, x, transition, onOpenSlide }: CarouselItemProps) {
   const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset];
-  const outputRange = [90, 0, -90];
+  const outputRange = flat ? [0, 0, 0] : [90, 0, -90];
   const rotateY = useTransform(x, range, outputRange, { clamp: false });
 
   return (
@@ -68,6 +71,8 @@ function CarouselItem({ item, index, itemWidth, itemHeight, round, trackItemOffs
 export default function Carousel({
   items = DEFAULT_ITEMS,
   baseWidth = 300,
+  visibleItems = 1,
+  showArrows = false,
   autoplay = false,
   autoplayDelay = 3000,
   pauseOnHover = false,
@@ -76,7 +81,10 @@ export default function Carousel({
   onOpenSlide
 }: CarouselProps): React.JSX.Element {
   const containerPadding = 16;
-  const itemWidth = baseWidth - containerPadding * 2;
+  const flat = visibleItems > 1;
+  const itemWidth = round
+    ? baseWidth - containerPadding * 2
+    : Math.round((baseWidth - containerPadding * 2 - GAP * (visibleItems - 1)) / visibleItems);
   const itemHeight = Math.round(itemWidth * 0.85);
   const trackItemOffset = itemWidth + GAP;
   const itemsForRender = useMemo(() => {
@@ -187,6 +195,10 @@ export default function Carousel({
     });
   };
 
+  const step = (direction: 1 | -1) => {
+    setPosition(prev => Math.max(0, Math.min(prev + direction, itemsForRender.length - 1)));
+  };
+
   const dragProps = loop
     ? {}
     : {
@@ -233,6 +245,7 @@ export default function Carousel({
             itemWidth={itemWidth}
             itemHeight={itemHeight}
             round={round}
+            flat={flat}
             trackItemOffset={trackItemOffset}
             x={x}
             transition={effectiveTransition}
@@ -240,6 +253,32 @@ export default function Carousel({
           />
         ))}
       </motion.div>
+
+      {showArrows && itemsForRender.length > 1 && (
+        <>
+          <button
+            type="button"
+            className="carousel-arrow carousel-arrow--prev"
+            aria-label="Foto anterior"
+            onClick={() => step(-1)}
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            className="carousel-arrow carousel-arrow--next"
+            aria-label="Próxima foto"
+            onClick={() => step(1)}
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </>
+      )}
+
       <div className={`carousel-indicators-container ${round ? 'round' : ''}`}>
         <div className="carousel-indicators">
           {items.map((_, index) => (

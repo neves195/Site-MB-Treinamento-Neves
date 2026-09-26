@@ -7,6 +7,20 @@ function Turmas() {
     const [fotos, setFotos] = useState<FotoTurma[]>([]);
     const [carregando, setCarregando] = useState(true);
     const [fotoAberta, setFotoAberta] = useState<string | null>(null);
+    const [larguraJanela, setLarguraJanela] = useState(window.innerWidth);
+
+    // Quantas fotos aparecem ao mesmo tempo, conforme o tamanho da tela -
+    // baseWidth={820} fixo quebraria (estouraria a largura) no celular.
+    useEffect(() => {
+        function aoRedimensionar() {
+            setLarguraJanela(window.innerWidth);
+        }
+        window.addEventListener('resize', aoRedimensionar);
+        return () => window.removeEventListener('resize', aoRedimensionar);
+    }, []);
+
+    const visibleItems = larguraJanela < 768 ? 1 : larguraJanela < 1024 ? 2 : 3;
+    const baseWidth = larguraJanela < 768 ? Math.min(larguraJanela - 48, 340) : larguraJanela < 1024 ? 560 : 820;
 
     useEffect(() => {
       fetch(`${API_URL}/api/public/turmas/fotos-recentes`)
@@ -31,8 +45,13 @@ function Turmas() {
           <div className="turmas-carousel">
             <Carousel
               items={fotos.map((foto) => ({ image: foto.imagem, alt: foto.descricao ?? undefined, id: foto.id }))}
-              baseWidth={340}
+              baseWidth={baseWidth}
+              visibleItems={visibleItems}
+              showArrows
               loop
+              autoplay
+              autoplayDelay={3500}
+              pauseOnHover
               onOpenSlide={(item) => setFotoAberta(item.image)}
             />
           </div>
