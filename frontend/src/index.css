@@ -1023,63 +1023,53 @@ h1, h2, h3 {
 .turmas { background: var(--ink-bg); }
 .turmas .secao-eyebrow { color: var(--ink-eyebrow); }
 .turmas .secao-titulo { color: #FFFFFF; }
-.turmas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
+/* Wrapper do DepthCarousel — largura cheia da seção, altura fixa pra
+   caber os cards + setas + indicadores (o componente usa height:100%
+   do pai, então sem isso ele fica sem altura nenhuma pra trabalhar). */
+.turmas-carousel {
   margin-top: 28px;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
+  height: 460px;
 }
-.turma-card {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  aspect-ratio: 4 / 3;
+@media (max-width: 640px) {
+  .turmas-carousel { height: 380px; }
 }
-.turma-imagem {
-  position: absolute;
+
+/* Lightbox — abre ao clicar numa foto do carrossel */
+.foto-lightbox {
+  position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.06);
-  display: grid;
-  place-items: center;
-  color: #A39C8F;
-}
-
-.turma-imagem img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Legenda por cima da foto, com degradê escuro pra dar contraste */
-.turma-legenda {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: 18px 14px 14px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
-  color: #fff;
+  z-index: 4000;
+  background: rgba(8, 8, 10, 0.92);
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
 }
-.turma-legenda strong { font-size: 14px; }
-.turma-legenda span { font-size: 12px; opacity: 0.85; }
-/* Ícone de "ampliar" no canto (decorativo por enquanto) */
-.turma-expandir {
+.foto-lightbox img {
+  max-width: min(900px, 100%);
+  max-height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+.foto-lightbox-fechar {
   position: absolute;
-  top: 10px; right: 10px;
-  z-index: 1;
-  width: 30px; height: 30px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.85);
-  color: #222;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
   display: grid;
   place-items: center;
-  font-size: 14px;
+  cursor: pointer;
 }
+.foto-lightbox-fechar:hover { background: rgba(255, 255, 255, 0.18); }
+
 .turmas-nota {
   text-align: center;
   color: #6B655A;

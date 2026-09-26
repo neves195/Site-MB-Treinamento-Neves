@@ -38,6 +38,7 @@ export interface DepthCarouselProps {
   showControls?: boolean;
   showIndicators?: boolean;
   onChange?: (index: number, item: { image: string; alt?: string }) => void;
+  onOpenSlide?: (item: { image: string; alt?: string }, index: number) => void;
   className?: string;
 }
 
@@ -101,6 +102,7 @@ const DepthCarousel = ({
   showControls = true,
   showIndicators = true,
   onChange,
+  onOpenSlide,
   className = ''
 }: DepthCarouselProps) => {
   const data = useMemo(() => (Array.isArray(items) ? items : []).map(normalizeItem), [items]);
@@ -117,6 +119,7 @@ const DepthCarousel = ({
   const scaleRef = useRef(1);
   const cfgRef = useRef<CarouselConfig>({} as CarouselConfig);
   const onChangeRef = useRef(onChange);
+  const onOpenSlideRef = useRef(onOpenSlide);
 
   const dragRef = useRef<DragState | null>(null);
   const wheelTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -126,6 +129,7 @@ const DepthCarousel = ({
   const [active, setActive] = useState(0);
 
   onChangeRef.current = onChange;
+  onOpenSlideRef.current = onOpenSlide;
   cfgRef.current = {
     count,
     depth,
@@ -342,8 +346,9 @@ const DepthCarousel = ({
     (index: number) => {
       if (dragRef.current?.moved) return;
       setFocus(index, true);
+      onOpenSlideRef.current?.(data[index], index);
     },
-    [setFocus]
+    [setFocus, data]
   );
 
   useEffect(() => {

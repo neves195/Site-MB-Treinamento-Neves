@@ -6,6 +6,7 @@ import DepthCarousel from './DepthCarousel';
 function Turmas() {
     const [fotos, setFotos] = useState<FotoTurma[]>([]);
     const [carregando, setCarregando] = useState(true);
+    const [fotoAberta, setFotoAberta] = useState<string | null>(null);
 
     useEffect(() => {
       fetch(`${API_URL}/api/public/turmas/fotos-recentes`)
@@ -27,11 +28,25 @@ function Turmas() {
         )}
 
         {!carregando && fotos.length > 0 && (
-          <div className="turmas-grid">
-             <DepthCarousel
-            items={fotos.map((foto) => ({ image: foto.imagem, alt: foto.descricao ?? undefined }))}
-              />
-              
+          <div className="turmas-carousel">
+            <DepthCarousel
+              items={fotos.map((foto) => ({ image: foto.imagem, alt: foto.descricao ?? undefined }))}
+              visibleCards={5}
+              onOpenSlide={(item) => setFotoAberta(item.image)}
+            />
+          </div>
+        )}
+
+        {fotoAberta && (
+          <div className="foto-lightbox" onClick={() => setFotoAberta(null)}>
+            <button
+              className="foto-lightbox-fechar"
+              onClick={() => setFotoAberta(null)}
+              aria-label="Fechar"
+            >
+              ✕
+            </button>
+            <img src={fotoAberta} alt="Foto de turma ampliada" />
           </div>
         )}
       </section>
