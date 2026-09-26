@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Maximize2 } from 'lucide-react';
 import { API_URL } from '../config';
 import type { FotoTurma } from '../types/fotoTurma';
+import DepthCarousel from './DepthCarousel';
 
 function Turmas() {
     const [fotos, setFotos] = useState<FotoTurma[]>([]);
@@ -28,19 +28,10 @@ function Turmas() {
 
         {!carregando && fotos.length > 0 && (
           <div className="turmas-grid">
-            {fotos.map((foto) => (
-              <div key={foto.id} className="turma-card">
-                <span className="turma-expandir" aria-hidden="true"><Maximize2 size={16} /></span>
-                <div className="turma-imagem">
-                  <img src={foto.imagem} alt={foto.descricao || 'Foto de turma'} />
-                </div>
-                {foto.descricao && (
-                  <div className="turma-legenda">
-                    <strong>{foto.descricao}</strong>
-                  </div>
-                )}
-              </div>
-            ))}
+             <DepthCarousel
+            items={fotos.map((foto) => ({ image: foto.imagem, alt: foto.descricao ?? undefined }))}
+              />
+              
           </div>
         )}
       </section>
