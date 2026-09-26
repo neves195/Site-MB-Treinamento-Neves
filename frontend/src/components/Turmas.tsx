@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { API_URL } from '../config';
 import type { FotoTurma } from '../types/fotoTurma';
-import DepthCarousel from './DepthCarousel';
+import Carousel from './Carousel';
 
 function Turmas() {
     const [fotos, setFotos] = useState<FotoTurma[]>([]);
@@ -29,9 +29,10 @@ function Turmas() {
 
         {!carregando && fotos.length > 0 && (
           <div className="turmas-carousel">
-            <DepthCarousel
-              items={fotos.map((foto) => ({ image: foto.imagem, alt: foto.descricao ?? undefined }))}
-              visibleCards={5}
+            <Carousel
+              items={fotos.map((foto) => ({ image: foto.imagem, alt: foto.descricao ?? undefined, id: foto.id }))}
+              baseWidth={340}
+              loop
               onOpenSlide={(item) => setFotoAberta(item.image)}
             />
           </div>

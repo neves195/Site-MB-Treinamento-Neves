@@ -1023,18 +1023,15 @@ h1, h2, h3 {
 .turmas { background: var(--ink-bg); }
 .turmas .secao-eyebrow { color: var(--ink-eyebrow); }
 .turmas .secao-titulo { color: #FFFFFF; }
-/* Wrapper do DepthCarousel — largura cheia da seção, altura fixa pra
-   caber os cards + setas + indicadores (o componente usa height:100%
-   do pai, então sem isso ele fica sem altura nenhuma pra trabalhar). */
+/* Wrapper do Carousel — só centraliza; esse componente calcula a
+   própria altura pelo conteúdo, não precisa de altura fixa no pai. */
 .turmas-carousel {
   margin-top: 28px;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
-  height: 460px;
-}
-@media (max-width: 640px) {
-  .turmas-carousel { height: 380px; }
+  display: flex;
+  justify-content: center;
 }
 
 /* Lightbox — abre ao clicar numa foto do carrossel */
