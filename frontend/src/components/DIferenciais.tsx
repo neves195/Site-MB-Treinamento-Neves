@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { Presentation, Award, Users, FileText, Camera } from 'lucide-react';
+import { API_URL } from '../config';
 
 const diferencias = [
     { icone: Presentation, titulo: 'Aulas Teóricas e Práticas', texto: 'Operação real em máquinas, com instrutores experientes no campo.' },
@@ -8,6 +10,17 @@ const diferencias = [
 ];
 
 function Diferenciais() {
+    const [fotoDestaque, setFotoDestaque] = useState<string | null>(null);
+
+    // Foto de destaque cadastrada pra este slot ("diferenciais"). Se ainda
+    // não tiver nenhuma (404) ou a API estiver fora do ar, cai no placeholder.
+    useEffect(() => {
+        fetch(`${API_URL}/api/public/fotos-destaque/diferenciais`)
+            .then((resp) => (resp.ok ? resp.json() : null))
+            .then((dados) => setFotoDestaque(dados?.imagem ?? null))
+            .catch(() => setFotoDestaque(null));
+    }, []);
+
     return (
         <section id="diferenciais" className="container diferenciais">
             <div className="diferenciais-conteudo">
@@ -35,10 +48,14 @@ function Diferenciais() {
 
                 {/* Coluna direita: imagem */}
                 <div className="diferenciais-imagem">
-                    <span className="hero-imagem-placeholder">
-                        <Camera size={28} aria-hidden="true" />
-                        Foto da equipe ou do treinamento prático
-                    </span>
+                    {fotoDestaque ? (
+                        <img src={fotoDestaque} alt="Equipe MB durante treinamento prático" />
+                    ) : (
+                        <span className="hero-imagem-placeholder">
+                            <Camera size={28} aria-hidden="true" />
+                            Foto da equipe ou do treinamento prático
+                        </span>
+                    )}
                 </div>
             </div>
 
