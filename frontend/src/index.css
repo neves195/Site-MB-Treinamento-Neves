@@ -943,6 +943,13 @@ h1, h2, h3 {
   display: grid;
   place-items: center;
   padding: 20px;
+  overflow: hidden;
+}
+.diferenciais-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
 @media (max-width: 900px) {
