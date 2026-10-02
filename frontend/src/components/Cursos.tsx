@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { cursos } from '../data/cursos';
 import type { Categoria } from '../types/curso';
+import { getLinkWhatsapp } from '../config';
 import CursoCard from './CursoCard';
 
 const categorias: {id: Categoria; rotulo: string }[] = [
@@ -9,10 +10,21 @@ const categorias: {id: Categoria; rotulo: string }[] = [
     { id: 'nrs', rotulo: 'NRs de segurança' },
 ];
 
+const VISIVEIS_INICIAL = 6;
+const INCREMENTO = 6;
+
 function Cursos() {
     const [categoriaAtiva, setCategoriaAtiva] = useState<Categoria>('moveis');
+    const [visiveis, setVisiveis] = useState(VISIVEIS_INICIAL);
+
+    function trocarCategoria(categoria: Categoria) {
+        setCategoriaAtiva(categoria);
+        setVisiveis(VISIVEIS_INICIAL); // volta a mostrar só os primeiros ao trocar de aba
+    }
 
     const CursosFiltrados = cursos.filter((curso) => curso.categoria === categoriaAtiva);
+    const CursosVisiveis = CursosFiltrados.slice(0, visiveis);
+    const restantes = CursosFiltrados.length - CursosVisiveis.length;
 
     return (
         <section id="cursos" className="container cursos">
@@ -28,7 +40,7 @@ function Cursos() {
                         <button
                             key={cat.id}
                             className={ativa ? 'cursos-aba ativa' : 'cursos-aba'}
-                            onClick={() => setCategoriaAtiva(cat.id)}
+                            onClick={() => trocarCategoria(cat.id)}
                             >
                                 {cat.rotulo} <span className="cursos-aba-num">{quantidade}</span>
                             </button>
@@ -38,10 +50,32 @@ function Cursos() {
 
             {/* grade so com os cursos filtrador */}
             <div className="cursos-grid">
-                {CursosFiltrados.map((curso) => (
+                {CursosVisiveis.map((curso) => (
                     <CursoCard key={curso.id} curso={curso} />
                 ))}
             </div>
+
+            {restantes > 0 && (
+                <button
+                    type="button"
+                    className="btn-secundario cursos-mostrar-mais"
+                    onClick={() => setVisiveis(visiveis + INCREMENTO)}
+                >
+                    Mostrar mais ({restantes})
+                </button>
+            )}
+
+            <p className="cursos-nao-achou">
+                Não encontrou o curso que procura?{' '}
+                <a
+                    href={getLinkWhatsapp('Olá! Não encontrei o curso que procuro no catálogo. Poderia me passar mais informações?')}
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Entre em contato
+                </a>{' '}
+                para mais informações.
+            </p>
         </section>
     );
 }

@@ -77,6 +77,27 @@ body {
   margin-right: auto;
 }
 
+.cursos-mostrar-mais {
+  display: block;
+  margin: 32px auto 0;
+  cursor: pointer;
+}
+
+.cursos-nao-achou {
+  margin: 32px auto 0;
+  text-align: center;
+  color: var(--paper-muted);
+  font-size: 15px;
+}
+.cursos-nao-achou a {
+  color: var(--paper-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.cursos-nao-achou a:hover { color: var(--accent); }
+
 /* Card padrão — usado em seção "paper" (fundo claro): elevação sólida, sem vidro */
 .card {
   background: var(--surface);

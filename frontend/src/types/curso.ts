@@ -1,7 +1,9 @@
 export type Categoria = 'moveis' | 'industriais' | 'nrs';
 
 export interface Curso {
-    id: number;
+    /** Slug único por categoria (ex.: "moveis-empilhadeira"). Nunca reutilizar
+     * nem renumerar — evita colisão ao editar o arquivo em máquinas diferentes. */
+    id: string;
     categoria: Categoria;
     nome: string;
     nr: string;
