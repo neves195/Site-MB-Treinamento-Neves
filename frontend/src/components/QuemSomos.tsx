@@ -54,7 +54,7 @@ function QuemSomos() {
           <div className={visiveis.length > 0 ? 'quem-somos-grid com-equipe' : 'quem-somos-grid'}>
             <div className="quem-somos-conteudo">
                 <p className="secao-eyebrow">Quem somos</p>
-                <h2 className="secao-titulo">Segurança do trabalho com profissionais qualificados</h2>
+                <h2 className="secao-titulo">Quem está por trás da MB</h2>
 
                 <p className="quem-somos-texto">
                     A MB Consultoria e Treinamento Neves atua há mais de 15 anos na
