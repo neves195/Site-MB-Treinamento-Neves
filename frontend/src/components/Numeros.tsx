@@ -5,7 +5,7 @@ const estatistica = [
     { valor: 480, sufixo: '+', rotulo: 'Turmas realizadas' },
     { valor: 6500, sufixo: '+', rotulo: 'Alunos certificados' },
     { valor: 15, sufixo: '+', rotulo: 'Anos de experiência' },
-    { valor: 120, sufixo: '+', rotulo: 'Empresas atendidas' },
+    { valor: 50, sufixo: '+', rotulo: 'Empresas atendidas' },
 ];
 
 function Numeros() {
@@ -46,9 +46,6 @@ function Numeros() {
                     </div>
                 ))}
                 </div>
-                <p className="numeros-nota">
-                    Números ilustrativos - substituir pelos dados reais.
-                </p>
             </section>
     );
 }
