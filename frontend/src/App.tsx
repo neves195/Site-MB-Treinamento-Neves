@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Numeros from './components/Numeros';
+import QuemSomos from './components/QuemSomos';
 import Servicos from './components/Servicos';
 import Cursos from './components/Cursos';
 import Certificado from './components/Certificado';
@@ -23,6 +24,10 @@ function App() {
 
       <Reveal>
         <Numeros />
+      </Reveal>
+
+      <Reveal>
+        <QuemSomos />
       </Reveal>
 
       <Reveal>

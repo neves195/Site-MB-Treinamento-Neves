@@ -594,6 +594,104 @@ html {
 }
 
 /* SERVIÇOS — seção "paper" (clara) */
+.quem-somos {
+  max-width: 100%;
+  margin: 0;
+  padding: 64px 20px;
+  background: var(--surface-2);
+}
+.quem-somos-conteudo { text-align: center; }
+.quem-somos .secao-eyebrow { color: #8A6200; }
+:root[data-theme="escuro"] .quem-somos .secao-eyebrow { color: var(--accent); }
+.quem-somos .secao-titulo { color: var(--paper-text); }
+.quem-somos-texto {
+  color: var(--paper-muted);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-top: 16px;
+}
+.quem-somos .servico-link { display: inline-block; margin-top: 24px; }
+
+/* Texto de um lado, fotos da equipe do outro (empilha em telas menores) */
+.quem-somos-grid {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.quem-somos-grid.com-equipe {
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 56px;
+  align-items: center;
+}
+.quem-somos-grid.com-equipe .quem-somos-conteudo { text-align: left; }
+.quem-somos-grid.com-equipe .secao-eyebrow,
+.quem-somos-grid.com-equipe .secao-titulo { text-align: left; }
+
+/* Cartões da equipe: foto quadrada + nome + cargo */
+.quem-somos-equipe {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
+}
+.quem-somos-grid.com-equipe .quem-somos-equipe {
+  grid-template-columns: repeat(2, 230px);
+  margin-top: 0;
+}
+@media (max-width: 900px) {
+  .quem-somos-grid.com-equipe { grid-template-columns: 1fr; gap: 40px; }
+  .quem-somos-grid.com-equipe .quem-somos-conteudo,
+  .quem-somos-grid.com-equipe .secao-eyebrow,
+  .quem-somos-grid.com-equipe .secao-titulo { text-align: center; }
+  .quem-somos-grid.com-equipe .quem-somos-equipe {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 260px));
+  }
+}
+.pessoa-card {
+  margin: 0;
+  padding: 16px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(28, 28, 28, 0.04), 0 12px 28px rgba(28, 28, 28, 0.06);
+  border-radius: 16px;
+}
+.quem-somos-foto {
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.quem-somos-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.quem-somos-foto-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  color: var(--paper-muted);
+  font-size: 14px;
+}
+.pessoa-legenda {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pessoa-legenda strong { font-size: 17px; color: var(--paper-text); }
+.pessoa-cargo { font-size: 14px; font-weight: 600; color: #8A6200; }
+:root[data-theme="escuro"] .pessoa-cargo { color: var(--accent); }
+.pessoa-bio { margin-top: 8px; font-size: 14px; line-height: 1.6; color: var(--paper-muted); }
+
 .servicos {
   max-width: 100%;
   margin: 0;

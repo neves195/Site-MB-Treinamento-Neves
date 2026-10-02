@@ -41,6 +41,7 @@ function Header() {
                     <X size={26} />
                 </button>
             )}
+            <a href="#quem-somos" onClick={() => setMenuAberto(false)}>Quem somos</a>
             <a href="#servicos" onClick={() => setMenuAberto(false)}>Serviços</a>
             <a href="#cursos" onClick={() => setMenuAberto(false)}>Cursos</a>
             <a href="#diferenciais" onClick={() => setMenuAberto(false)}>Diferenciais</a>
