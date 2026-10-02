@@ -27,10 +27,10 @@
 }
 
 :root[data-theme="escuro"] {
-  --bg: #121110;
-  --surface: #262422;
-  --surface-2: #2E2A26;
-  --border: rgba(255, 255, 255, 0.10);
+  --bg: #151413;
+  --surface: #2B2825;
+  --surface-2: #35312C;
+  --border: rgba(255, 255, 255, 0.16);
   --text: #FAF8F4;
   --muted: #B8B0A2;
   --accent: #FFC933;
@@ -42,10 +42,23 @@
   --ink-text: #FFFFFF;
   --ink-muted: #A39C8F;
   --ink-eyebrow: #FFCB4D;
-  --paper-bg: #242220;
+  --paper-bg: #1C1B19;
   --paper-text: #FAF8F4;
   --paper-muted: #B8B0A2;
 }
+
+/* Tema escuro: cartões com mais profundidade (a sombra clara do tema padrão não aparece no escuro) */
+:root[data-theme="escuro"] .card,
+:root[data-theme="escuro"] .servico-card,
+:root[data-theme="escuro"] .publico-card,
+:root[data-theme="escuro"] .depoimento-card,
+:root[data-theme="escuro"] .pessoa-card {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+:root[data-theme="escuro"] .card:hover {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 16px 36px rgba(0, 0, 0, 0.55);
+}
+:root[data-theme="escuro"] .quem-somos { background: #171615; }
 
 * {
   margin: 0;
@@ -816,7 +829,7 @@ html {
 .rodape-base {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   text-align: center;
-  color: #6B655A;
+  color: #8A8378;
   font-size: 13px;
   padding: 20px;
 }
@@ -959,7 +972,7 @@ h1, h2, h3 {
 }
 .numero-nota {
   text-align: center;
-  color: #6B655A;
+  color: #8A8378;
   font-size: 12.5px;
   margin-top: 16px;
   max-width: 1100px;
@@ -1133,7 +1146,7 @@ h1, h2, h3 {
 
 .diferenciais-nota {
   text-align: center;
-  color: #6B655A;
+  color: #8A8378;
   font-size: 13px;
   margin-top: 24px;
 }
@@ -1188,7 +1201,7 @@ h1, h2, h3 {
 
 .turmas-nota {
   text-align: center;
-  color: #6B655A;
+  color: #8A8378;
   font-size: 13px;
   margin-top: 20px;
   max-width: 1100px;
