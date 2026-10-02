@@ -18,6 +18,21 @@ function Hero() {
       <div className="hero-conteudo">
         {/* Coluna esquerda: texto */}
         <div className="hero-texto">
+          {/* Logo — só existe aqui no Hero, não no header (que é fixo/sticky).
+              Duas versões (texto escuro/claro), o CSS mostra a certa conforme o tema. */}
+          <div className="hero-logo">
+            <img
+              src="/logo-mb-clara.png"
+              alt="MB Consultoria e Treinamento Neves"
+              className="hero-logo-img hero-logo-clara"
+            />
+            <img
+              src="/logo-mb-escura.png"
+              alt="MB Consultoria e Treinamento Neves"
+              className="hero-logo-img hero-logo-escura"
+            />
+          </div>
+
           <span className="hero-badge"><ShieldCheck size={14} /> Referência em Segurança do Trabalho</span>
 
           <h1 className="hero-titulo">

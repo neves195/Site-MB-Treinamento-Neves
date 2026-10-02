@@ -188,8 +188,6 @@ body {
   background-color: rgba(10, 10, 10, 0.9);
 }
 
-.header-logo { font-weight: 700; font-size: 18px; }
-
 .header-nav {
   flex: 1;                    /* ocupa o espaço do meio */
   display: flex;
@@ -275,6 +273,24 @@ html {
 }
 @media (max-width: 900px) {
   .hero-conteudo { grid-template-columns: 1fr; gap: 40px; }  /* empilha no celular */
+}
+
+/* Logo do Hero — mesmo lockup do header antigo, duas versões PNG
+   transparentes (texto escuro / texto claro). Mostra a de texto escuro
+   por padrão (hero claro); no tema escuro, troca pra versão de texto claro. */
+.hero-logo { margin-bottom: 20px; }
+.hero-logo-img {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+.hero-logo-escura { display: none; }
+:root[data-theme="escuro"] .hero-logo-clara { display: none; }
+:root[data-theme="escuro"] .hero-logo-escura { display: block; }
+
+@media (max-width: 768px) {
+  .hero-logo-img { height: 54px; }
 }
 
 .hero-badge {
@@ -963,14 +979,12 @@ h1, h2, h3 {
   aspect-ratio: 3 / 4;
   display: grid;
   place-items: center;
-  padding: 20px;
   overflow: hidden;
 }
 .diferenciais-imagem img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px;
 }
 
 @media (max-width: 900px) {
@@ -1030,63 +1044,50 @@ h1, h2, h3 {
 .turmas { background: var(--ink-bg); }
 .turmas .secao-eyebrow { color: var(--ink-eyebrow); }
 .turmas .secao-titulo { color: #FFFFFF; }
-.turmas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
+/* Wrapper do Carousel — só centraliza; esse componente calcula a
+   própria altura pelo conteúdo, não precisa de altura fixa no pai. */
+.turmas-carousel {
   margin-top: 28px;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
-}
-.turma-card {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  aspect-ratio: 4 / 3;
-}
-.turma-imagem {
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.06);
-  display: grid;
-  place-items: center;
-  color: #A39C8F;
-}
-
-.turma-imagem img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Legenda por cima da foto, com degradê escuro pra dar contraste */
-.turma-legenda {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: 18px 14px 14px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
-  color: #fff;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  justify-content: center;
 }
-.turma-legenda strong { font-size: 14px; }
-.turma-legenda span { font-size: 12px; opacity: 0.85; }
-/* Ícone de "ampliar" no canto (decorativo por enquanto) */
-.turma-expandir {
+
+/* Lightbox — abre ao clicar numa foto do carrossel */
+.foto-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  background: rgba(8, 8, 10, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+.foto-lightbox img {
+  max-width: min(900px, 100%);
+  max-height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+.foto-lightbox-fechar {
   position: absolute;
-  top: 10px; right: 10px;
-  z-index: 1;
-  width: 30px; height: 30px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.85);
-  color: #222;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
   display: grid;
   place-items: center;
-  font-size: 14px;
+  cursor: pointer;
 }
+.foto-lightbox-fechar:hover { background: rgba(255, 255, 255, 0.18); }
+
 .turmas-nota {
   text-align: center;
   color: #6B655A;
@@ -1287,29 +1288,10 @@ h1, h2, h3 {
 }
 .header.rolado .btn-hamburger { color: #FFFFFF; }
 
-/* LOGO — lockup completo (símbolo + texto), duas versões PNG transparentes
-   (texto escuro / texto claro). Por padrão mostra a de texto escuro (header
-   transparente sobre o hero claro); no tema escuro OU já rolado (fundo
-   escuro sólido do header), troca pra versão de texto claro — mesma lógica
-   já usada pros links do menu. */
-.header-logo-img {
-  height: 62px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-}
-.header-logo-escura { display: none; }
-
-:root[data-theme="escuro"] .header-logo-clara,
-.header.rolado .header-logo-clara { display: none; }
-:root[data-theme="escuro"] .header-logo-escura,
-.header.rolado .header-logo-escura { display: block; }
-
 @media (max-width: 768px) {
   .header { padding: 12px 16px; }
   .header-nav { display: none; }
   .btn-whatsapp { padding: 8px 14px; font-size: 13px; }
-  .header-logo-img { height: 46px; width: auto; }
   .btn-hamburger { display: block; }
 
   /* Menu mobile aberto */
