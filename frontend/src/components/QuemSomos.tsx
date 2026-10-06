@@ -4,7 +4,7 @@ import { User } from 'lucide-react';
 interface Pessoa {
     nome: string;
     cargo: string;
-    foto: string; // arquivo em frontend/public (ex.: /fundador.jpg)
+    foto: string; // arquivo em frontend/public (ex.: /imagens/equipe/fundador.jpg)
     bio: string;
 }
 
@@ -12,8 +12,8 @@ interface Pessoa {
 // (cargo exato, formação, registro profissional). Com "nome" vazio a pessoa não
 // aparece no site publicado — no ambiente de desenvolvimento aparece um quadrado de teste.
 const equipe: Pessoa[] = [
-    { nome: 'Marco Antônio das Neves', cargo: 'Fundador e Diretor Técnico', foto: '/fundador.jpg', bio: 'Técnico em Segurança do Trabalho' },
-    { nome: 'Marco Antônio das Neves Júnior', cargo: 'Engenheiro de Segurança do Trabalho', foto: '/engenheiro.jpg', bio: '' },
+    { nome: 'Marco Antônio das Neves', cargo: 'Fundador e Diretor Técnico', foto: '/imagens/equipe/fundador.jpg', bio: 'Técnico em Segurança do Trabalho' },
+    { nome: 'Marco Antônio das Neves Júnior', cargo: 'Engenheiro de Segurança do Trabalho', foto: '/imagens/equipe/engenheiro.jpg', bio: '' },
 ];
 
 function CartaoPessoa({ pessoa }: { pessoa: Pessoa }) {

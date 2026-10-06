@@ -22,12 +22,12 @@ function Hero() {
               Duas versões (texto escuro/claro), o CSS mostra a certa conforme o tema. */}
           <div className="hero-logo">
             <img
-              src="/logo-mb-clara.png"
+              src="/imagens/logos/logo-mb-clara.png"
               alt="MB Consultoria e Treinamento Neves"
               className="hero-logo-img hero-logo-clara"
             />
             <img
-              src="/logo-mb-escura.png"
+              src="/imagens/logos/logo-mb-escura.png"
               alt="MB Consultoria e Treinamento Neves"
               className="hero-logo-img hero-logo-escura"
             />
@@ -75,7 +75,7 @@ function Hero() {
         {/* Coluna direita: foto recortada + selo + frase */}
         <div className="hero-visual">
           <div className="hero-imagem">
-            <img src="/hero-visual.jpg" alt="Treinamento prático da MB Consultoria" />
+            <img src="/imagens/hero/hero-visual.jpg" alt="Treinamento prático da MB Consultoria" />
           </div>
 
           <span className="hero-manuscrito">

@@ -2,10 +2,10 @@ import { Building2 } from 'lucide-react';
  
 //Placeholder - substituir "nome" pelas empresas reais e trocar o icone por <img src="..." />
 const parceiros = [
-    { id: 1, nome: 'JC Montagem Industrial', logo: '/parceiros/logo-jc.jpeg' },
-    { id: 2, nome: 'Pré-Vale Pré Moldados', logo: '/parceiros/logo-prevale.png' },
-    { id: 3, nome: 'Imediato Nextey', logo: '/parceiros/logo-imediato.png' },
-    { id: 4, nome: 'MegaByte', logo: '/parceiros/logo-megabyte.jpg' }, 
+    { id: 1, nome: 'JC Montagem Industrial', logo: '/imagens/parceiros/logo-jc.jpeg' },
+    { id: 2, nome: 'Pré-Vale Pré Moldados', logo: '/imagens/parceiros/logo-prevale.png' },
+    { id: 3, nome: 'Imediato Nextey', logo: '/imagens/parceiros/logo-imediato.png' },
+    { id: 4, nome: 'MegaByte', logo: '/imagens/parceiros/logo-megabyte.jpg' }, 
     { id: 5, nome: 'Parceiros', logo: '' },
 ];
 
