@@ -2,7 +2,9 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/favicon-192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- preconnect: "aquece" a conexão com o Google Fonts (deixa mais rapido)-->
@@ -19,9 +21,48 @@
       <meta name="description" content="Treinamento em NRs e operação de máquinas 
       (empilhadeira, munck, guindaste) com certificado na hora, válido em todo o Brasil. Para
       empresas e alunos. Agudos/SP e região." />
-  </head>
-  <body>
+
+      <!-- Endereço oficial da página (evita o Google tratar o outro endereço como cópia) -->
+      <link rel="canonical" href="https://site-mb-treinamento-neves.vercel.app/" />
+      <meta name="theme-color" content="#1C1C1C" />
+
+      <!-- Open Graph: preview do link no WhatsApp, Facebook, LinkedIn -->
+      <meta property="og:type" content="website" />
+      <meta property="og:locale" content="pt_BR" />
+      <meta property="og:site_name" content="MB Consultoria e Treinamento Neves" />
+      <meta property="og:title" content="MB Consultoria Neves - Cursos de NR e Máquinas" />
+      <meta property="og:description" content="Treinamento em NRs e operação de máquinas com certificado na hora, válido em todo o Brasil. Para empresas e alunos. Agudos/SP e região." />
+      <meta property="og:url" content="https://site-mb-treinamento-neves.vercel.app/" />
+      <meta property="og:image" content="https://site-mb-treinamento-neves.vercel.app/imagens/og/og-mb.jpg" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta name="twitter:card" content="summary_large_image" />
+
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "MB Consultoria e Treinamento Neves",
+          "url": "https://site-mb-treinamento-neves.vercel.app/",
+          "logo": "https://site-mb-treinamento-neves.vercel.app/imagens/og/og-mb.jpg",
+          "image": "https://site-mb-treinamento-neves.vercel.app/imagens/og/og-mb.jpg",
+          "description": "Treinamentos em NRs e operação de máquinas, e consultoria em segurança do trabalho.",
+          "telephone": "+5514991839851",
+          "email": "treinamentombconsultoria@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "postalCode": "17123-172",
+            "streetAddress": "Rua Celso Morato Leite, 384 - Jardim Cruzeiro",
+            "addressLocality": "Agudos",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+          }
+        }
+</script>
+    </head>
+    <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
   </body>
 </html>
