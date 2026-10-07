@@ -24,8 +24,8 @@ function Footer() {
             do trabalho — Agudos/SP.
           </p>
           <div className="rodape-redes">
-            <a href="#" aria-label="Instagram"><FaInstagram size={20} /></a>
-            <a href="#" aria-label="Facebook"><FaFacebook size={20} /></a>
+            <a href="https://www.instagram.com/mbtreinamentoneves/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram size={20} /></a>
+            <a href="https://www.facebook.com/marcobola.ag" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebook size={20} /></a>
           </div>
         </div>
 
