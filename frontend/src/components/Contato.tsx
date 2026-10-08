@@ -1,4 +1,5 @@
 import { getLinkWhatsapp } from '../config';
+import { FaWhatsapp } from 'react-icons/fa';
 
 function Contato() {
   const mensagem =
@@ -16,11 +17,12 @@ function Contato() {
           precisa capacitar e em qual curso - montamos a proposta na hora.
         </p>
         <a
-          className="btn-primario cta-botao"
+          className="btn-primario btn-com-icone btn-wa cta-botao"
           href={linkWhatsapp}
           target="_blank"
           rel="noopener"
         >
+          <FaWhatsapp size={18} aria-hidden="true" />
           Quero Me Inscrever
         </a>
       </div>

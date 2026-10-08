@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { getLinkWhatsapp } from "../config";
 import { X, Moon, Sun, Menu } from "lucide-react";
+import { FaWhatsapp } from 'react-icons/fa';
 
 function Header() {
     const [menuAberto, setMenuAberto] = useState(false);
@@ -63,11 +64,12 @@ function Header() {
                     <Menu size={26} />
                 </button>
                 <a
-                    className="btn-whatsapp"
+                    className="btn-whatsapp btn-com-icone btn-wa"
                     href={linkWhatsapp}
                     target="_blank"
                     rel="noopener"
                     >
+                    <FaWhatsapp size={18} aria-hidden="true" />
                     Fale no WhatsApp
                 </a>
             </div>

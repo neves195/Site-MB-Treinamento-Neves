@@ -120,6 +120,10 @@ body {
   padding: 22px;
   transition: transform 0.3s, box-shadow 0.3s;
   overflow: hidden; /* recorta os cantos de cima da foto no mesmo raio do card */
+  /* Coluna: cards da mesma fileira têm a mesma altura e os botões ficam
+     sempre alinhados no rodapé, mesmo com descrição ou título maiores */
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -161,6 +165,7 @@ body {
 
 /* a nr vira uma "etiqueta" (chip) âmbar */
 .card-nr {
+  align-self: flex-start;
   display: inline-block;
   font-size: 12px;
   font-weight: 600;
@@ -241,14 +246,19 @@ body {
 .card-whatsapp {
   /* Verde sólido de verdade (cor fixa, não --ok — esse token clareia demais
      no tema escuro pra funcionar como fundo com texto branco) */
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   margin-top: 0;
-  flex: 1;
+  flex: 1 1 auto;
+  white-space: nowrap;
   text-align: center;
   background-color: #22C55E;
   color: #FFFFFF;
   border: 1px solid #22C55E;
-  padding: 9px 16px;
+  min-height: 40px;
+  padding: 0 10px;
   border-radius: 999px;
   font-size: 14px;
   font-weight: 600;
@@ -470,6 +480,14 @@ html {
   .hero-manuscrito { display: none; }  /* fica poluído empilhado no celular */
   .hero-visual::before { left: -10px; width: 50px; }
   .hero-flutuante { right: 8px; bottom: -16px; padding: 14px 20px; }
+}
+
+/* Ícone + texto lado a lado (botões que abrem o WhatsApp) */
+a.btn-com-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 /* Botões reutilizáveis */
@@ -860,15 +878,21 @@ h1, h2, h3 {
 }
 
 /* Linha dos dois botões do card */
-.card-botoes { display: flex; gap: 10px; margin-top: 14px; }
+.card-botoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 14px; }
 
 .btn-mais-info {
   /* Sólido, não mais texto apagado sobre fundo quase transparente */
-  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1 1 auto;
+  white-space: nowrap;
   background: var(--ink-bg);
   color: #FFFFFF;
   border: 1px solid var(--ink-bg);
-  padding: 10px 14px;
+  min-height: 40px;
+  padding: 0 10px;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -1514,3 +1538,20 @@ h1, h2, h3 {
 @media (prefers-reduced-motion: reduce) {
   .parceiros-trilho { animation: none; }
 }
+
+/* Botões que abrem o WhatsApp: todos no mesmo verde (declarado no fim, com
+   seletor mais específico, pra vencer os estilos de cada botão) */
+a.btn-wa {
+  background: #22C55E;
+  color: #FFFFFF;
+  border: 1px solid #22C55E;
+}
+a.btn-wa:hover {
+  background: #22C55E;
+  border-color: #22C55E;
+  filter: brightness(1.08);
+}
+
+/* Cartões de público: botão sempre no rodapé, alinhado entre os dois cartões */
+.publico-card { display: flex; flex-direction: column; }
+.publico-card .btn-com-icone { align-self: flex-start; margin-top: auto; }

@@ -1,4 +1,5 @@
 import { getLinkWhatsapp } from '../config';
+import { FaWhatsapp } from 'react-icons/fa';
 
 function Publico() {
   const msgEmpresa =
@@ -18,11 +19,12 @@ function Publico() {
             <li>Controle de validades e agenda de reciclagem</li>
           </ul>
           <a
-            className="btn-primario"
+            className="btn-primario btn-com-icone btn-wa"
             href={getLinkWhatsapp(msgEmpresa)}
             target="_blank"
             rel="noopener"
           >
+            <FaWhatsapp size={18} aria-hidden="true" />
             Solicitar orçamento
           </a>
         </div>
@@ -37,11 +39,12 @@ function Publico() {
             <li>Turmas abertas, sem precisar de vínculo com empresa</li>
           </ul>
           <a
-            className="btn-secundario"
+            className="btn-secundario btn-com-icone btn-wa"
             href={getLinkWhatsapp(msgAluno)}
             target="_blank"
             rel="noopener"
           >
+            <FaWhatsapp size={18} aria-hidden="true" />
             Ver datas das próximas turmas
           </a>
         </div>

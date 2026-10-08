@@ -2,7 +2,8 @@ import { useState } from 'react';
 import type { Curso } from '../types/curso';
 import { getLinkWhatsapp } from '../config';
 import { createPortal } from 'react-dom';
-import { ImageOff } from 'lucide-react';
+import { ImageOff, Info } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
 interface CursoCardProps {
     curso: Curso;
@@ -42,6 +43,7 @@ return (
 
             {/* Abre o modal */}
             <button className="btn-mais-info" onClick={() => setModalAberto(true)}>
+                <Info size={16} aria-hidden="true" />
                 Mais informações
             </button>
 
@@ -51,6 +53,7 @@ return (
             target="_blank"
             rel="noopener"
         >
+            <FaWhatsapp size={16} aria-hidden="true" />
             WhatsApp
         </a>
     </div>
@@ -79,7 +82,8 @@ return (
                     ))}
                 </ul>
 
-                <a className="modal-cta" href={linkWhatsapp} target="_blank" rel="noopener">
+                <a className="modal-cta btn-com-icone btn-wa" href={linkWhatsapp} target="_blank" rel="noopener">
+                    <FaWhatsapp size={18} aria-hidden="true" />
                     Tenho Interesse
                 </a>
         </div>

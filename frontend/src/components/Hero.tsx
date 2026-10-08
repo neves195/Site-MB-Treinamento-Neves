@@ -1,4 +1,5 @@
 import { getLinkWhatsapp } from '../config';
+import { FaWhatsapp } from 'react-icons/fa';
 import { ShieldCheck, HardHat, Forklift, Users, ShieldAlert, ArrowDown } from "lucide-react";
 
 const recursos = [
@@ -45,7 +46,8 @@ function Hero() {
           </p>
 
           <div className="hero-botoes">
-            <a className="btn-primario" href={linkWhatsapp} target="_blank" rel="noopener">
+            <a className="btn-primario btn-com-icone btn-wa" href={linkWhatsapp} target="_blank" rel="noopener">
+              <FaWhatsapp size={18} aria-hidden="true" />
               Falar no WhatsApp
             </a>
             <a className="btn-secundario" href="#cursos">
