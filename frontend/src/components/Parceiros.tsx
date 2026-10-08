@@ -6,7 +6,6 @@ const parceiros = [
     { id: 2, nome: 'Pré-Vale Pré Moldados', logo: '/imagens/parceiros/logo-prevale.png' },
     { id: 3, nome: 'Imediato Nextey', logo: '/imagens/parceiros/logo-imediato.png' },
     { id: 4, nome: 'MegaByte', logo: '/imagens/parceiros/logo-megabyte.jpg' }, 
-    { id: 5, nome: 'Parceiros', logo: '' },
 ];
 
 function Parceiros() {
