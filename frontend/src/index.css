@@ -144,8 +144,14 @@ body {
   margin: -22px -22px 16px -22px;
   aspect-ratio: 16 / 10;
   background: var(--surface-2);
+  /* A foto fica "solta" dentro da caixa (absolute): assim ela é cortada para
+     16:10 e nunca estica o card, mesmo se a imagem for mais alta que isso */
+  position: relative;
+  overflow: hidden;
 }
 .card-imagem img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1555,3 +1561,60 @@ a.btn-wa:hover {
 /* Cartões de público: botão sempre no rodapé, alinhado entre os dois cartões */
 .publico-card { display: flex; flex-direction: column; }
 .publico-card .btn-com-icone { align-self: flex-start; margin-top: auto; }
+
+/* ===== CELULAR: cards compactos ===== */
+@media (max-width: 640px) {
+  /* Catálogo: foto pequena ao lado do texto, em vez de foto gigante em cima */
+  .cursos-grid { gap: 14px; margin-top: 16px; }
+  .cursos-grid .card {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    column-gap: 14px;
+    align-content: start;
+    padding: 14px;
+  }
+  .cursos-grid .card-imagem {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    margin: 0;
+    width: 96px;
+    height: 96px;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cursos-grid .card:hover { transform: none; }
+  .cursos-grid .card:hover .card-imagem img { transform: none; }
+  .cursos-grid .card-nr { grid-column: 2; justify-self: start; align-self: start; }
+  .cursos-grid .card-nome { grid-column: 2; font-size: 16px; line-height: 1.25; margin-top: 6px; }
+  .cursos-grid .card-carga { grid-column: 2; margin-top: 2px; }
+  .cursos-grid .card-desc {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    font-size: 13px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .cursos-grid .card-botoes { grid-column: 1 / -1; padding-top: 12px; gap: 8px; }
+  .cursos-grid .btn-mais-info,
+  .cursos-grid .card-whatsapp { font-size: 13px; min-height: 38px; padding: 0 8px; }
+
+  /* Equipe: os dois cartões lado a lado, menores */
+  .quem-somos-grid.com-equipe .quem-somos-equipe {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .pessoa-card { padding: 10px; }
+  .pessoa-legenda { margin-top: 10px; }
+  .pessoa-legenda strong { font-size: 14px; line-height: 1.25; }
+  .pessoa-cargo { font-size: 12px; }
+  .pessoa-bio { font-size: 12px; margin-top: 4px; }
+
+  /* Demais cartões: menos respiro interno */
+  .servico-card { padding: 20px; }
+  .publico-card { padding: 22px; }
+  .depoimento-card { padding: 20px; }
+}
+
