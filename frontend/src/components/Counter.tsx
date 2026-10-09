@@ -95,10 +95,6 @@ export default function Counter({ valor, fontSize = 42, cor = 'inherit', peso = 
           <Casa key={casa} casa={casa} valor={valor} altura={altura} ativo={ativo} />
         ))}
       </span>
-      <span className="gradient-container">
-        <span className="top-gradient" />
-        <span className="bottom-gradient" />
-      </span>
     </span>
   );
 }
