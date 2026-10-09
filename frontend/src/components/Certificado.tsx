@@ -19,7 +19,7 @@ function Certificado() {
             </div>
 
             <div className="certificado-imagem">
-                <img src="/imagens/certificado/certificado-exemplo.png" alt="Exemplo de certificado emitido pela MB Consultoria" />
+                <img src="/imagens/certificado/certificado-exemplo.webp" alt="Exemplo de certificado emitido pela MB Consultoria" />
             </div>
         </div>
     </section>

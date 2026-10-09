@@ -23,12 +23,12 @@ function Hero() {
               Duas versões (texto escuro/claro), o CSS mostra a certa conforme o tema. */}
           <div className="hero-logo">
             <img
-              src="/imagens/logos/logo-mb-clara.png"
+              src="/imagens/logos/logo-mb-clara.webp"
               alt="MB Consultoria e Treinamento Neves"
               className="hero-logo-img hero-logo-clara"
             />
             <img
-              src="/imagens/logos/logo-mb-escura.png"
+              src="/imagens/logos/logo-mb-escura.webp"
               alt="MB Consultoria e Treinamento Neves"
               className="hero-logo-img hero-logo-escura"
             />
