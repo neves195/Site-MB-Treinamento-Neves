@@ -55,7 +55,8 @@ function Footer() {
       </div>
 
       <div className="rodape-base">
-        © {anoAtual} MB Consultoria Neves — Todos os direitos reservados.
+        © {anoAtual} MB Consultoria Neves — CNPJ 
+        55.984.737/0001-88 — Todos os direitos reservados.
       </div>
     </footer>
   );
