@@ -7,6 +7,10 @@ const parceiros = [
     { id: 3, nome: 'Imediato Nextey', logo: '/imagens/parceiros/logo-imediato.png' },
     { id: 4, nome: 'MegaByte', logo: '/imagens/parceiros/logo-megabyte.jpg' }, 
     { id: 5, nome: 'Tudor Baterias', logo: '/imagens/parceiros/logo-tudor.jpg'},
+    { id: 6, nome: 'Conecta Treinamentos', logo: '/imagens/parceiros/logo-conecta.jpg'},
+    { id: 7, nome: 'Grupo Querino', logo: '/imagens/parceiros/logo-querino.jpg'},
+    { id: 8, nome: 'Mezzani Alimentos', logo: '/imagens/parceiros/logo-mezzani.jpg'},
+    { id: 9, nome: 'Grupo Ops', logo: '/imagens/parceiros/logo-grupoops.jpg'},
 ];
 
 function Parceiros() {
