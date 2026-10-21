@@ -1,26 +1,26 @@
 const depoimentos = [
     {
         id: 1,
-        texto: 'Fiz o curso de empilhadeira e em duas semanas já estava trabalhando. A prática com a máquina real fez toda a diferença.',
-        nome: 'Carlos Silva',
-        cargo: 'Operador de Empilhadeira',
-        iniciais: 'CS',
+        texto: 'Excelente curso! Os instrutores são muito comunicativos, atenciosos e gente boa. Sabem ensinar muito bem, explicam o conteúdo com clareza e têm muita paciência para tirar dúvidas. Foi uma ótima experiência, recomendo muito o curso a todos!',
+        nome: 'Kaua Carvalho',
+        cargo: 'Aluno de Empilhadeira',
+        iniciais: 'KC',
     },
     {
          id: 2,
-        texto: 'Contratamos a MB para capacitar toda a equipe nas NRs. Documentação impecável e instrutores que entendem de fábrica de verdade.',
-        nome: 'Marcos Oliveira',
-        cargo: 'Coordenador de Segurança — Ind. Metalúrgica',
-        iniciais: 'MO',
+        texto: 'Curso muito bom, principalmente para quem não tem experiência. Os instrutores explicam de forma simples e prática, com bastante conhecimento e paciência. Foi uma experiência muito positiva e de bastante aprendizado!',
+        nome: 'Rudinei Leite',
+        cargo: 'Funcionário da empresa - Tudor Baterias',
+        iniciais: 'RL',
     },
     {
         id: 3,
-        texto: 'Nunca tinha subido em uma máquina. O curso me deu confiança e o certificado me abriu portas. Recomendo de olhos fechados.',
+        texto: 'Foi uma experiência muito boa e de grande aprendizado. Aprendi bastante coisa que vou levar para minha vida profissional. Os instrutores explicaram tudo muito bem e teve muita paciência em ensinar. Foi uma ótima oportunidade para adquirir mais conhecimento e experiência. Agradeço a todos que fizeram parte desse aprendizado!',
         nome: 'Ana Rodrigues',
         cargo: 'Ex-aluna — Retroescavadeira',
         iniciais: 'AR',
     },
-    ];
+];
 
 function Depoimentos() {
     return (
@@ -32,7 +32,7 @@ function Depoimentos() {
                 {depoimentos.map((dep) => (
                     <div key={dep.id} className="depoimento-card">
                          <div className="depoimento-estrelas" aria-label="5 estrelas">★★★★★</div>
-                         <p className="depoimento-texto">"{dep.texto}</p>
+                         <p className="depoimento-texto">"{dep.texto}"</p>
                          <div className="depoimento-autor">
                             <span className="depoimento-avatar" aria-hidden="true">{dep.iniciais}</span>
                             <div>
@@ -43,10 +43,6 @@ function Depoimentos() {
                     </div>
                 ))}
             </div>
-
-            <p className="depoimentos-nota">
-                Depoimentos ilustrativos - substituir por relatos reais dos alunos.
-            </p>
         </section>
     );
 }
