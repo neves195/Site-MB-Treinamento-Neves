@@ -3,7 +3,7 @@ const depoimentos = [
         id: 1,
         texto: 'Excelente curso! Os instrutores são muito comunicativos, atenciosos e gente boa. Sabem ensinar muito bem, explicam o conteúdo com clareza e têm muita paciência para tirar dúvidas. Foi uma ótima experiência, recomendo muito o curso a todos!',
         nome: 'Kaua Carvalho',
-        cargo: 'Aluno de Empilhadeira',
+        cargo: 'Aluno - Empilhadeira',
         iniciais: 'KC',
     },
     {
@@ -16,9 +16,9 @@ const depoimentos = [
     {
         id: 3,
         texto: 'Foi uma experiência muito boa e de grande aprendizado. Aprendi bastante coisa que vou levar para minha vida profissional. Os instrutores explicaram tudo muito bem e teve muita paciência em ensinar. Foi uma ótima oportunidade para adquirir mais conhecimento e experiência. Agradeço a todos que fizeram parte desse aprendizado!',
-        nome: 'Ana Rodrigues',
-        cargo: 'Ex-aluna — Retroescavadeira',
-        iniciais: 'AR',
+        nome: 'Mariana Victoria',
+        cargo: 'Aluna - Empilhadeira',
+        iniciais: 'MV',
     },
 ];
 
