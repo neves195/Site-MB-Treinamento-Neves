@@ -1,4 +1,4 @@
 User-agent: * 
 Allow: /
 
-Sitemap: https://site-mb-treinamento-neves.vercel.app/sitemap.xml
+Sitemap: https://www.mbconsultoriaetreinamento.com.br/sitemap.xml
